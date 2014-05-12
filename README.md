@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/cornford/bootstrapper/version.png)](https://packagist.org/packages/cornford/bootstrapper)
 [![Total Downloads](https://poser.pugx.org/cornford/bootstrapper/d/total.png)](https://packagist.org/packages/cornford/bootstrapper)
-[![Build Status](https://travis-ci.org/bradcornford/bootstrapper.svg?branch=master)](https://travis-ci.org/bradcornford/Bootstrapper)
+[![Build Status](https://travis-ci.org/bradcornford/Bootstrapper.svg?branch=master)](https://travis-ci.org/bradcornford/Bootstrapper)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/?branch=master)
 
 Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providing a variety of helpers to speed up development. These include:
