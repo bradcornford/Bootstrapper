@@ -1,5 +1,5 @@
 {
-    "name": "vendor/cornford",
+    "name": "cornford/bootstrapper",
     "description": "An easy way to intergrate Twitter Bootstrap with Laravel 4.",
     "keywords": ["laravel", "bootstrap", "twitter", "form", "alerts", "views", "templates"],
     "license": "MIT",
