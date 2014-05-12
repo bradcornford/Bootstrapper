@@ -1,4 +1,4 @@
-# Fast Bootstrap intergration with Laravel 4
+# Fast Bootstrap integration with Laravel 4
 
 [![Latest Stable Version](https://poser.pugx.org/cornford/bootstrapper/version.png)](https://packagist.org/packages/cornford/bootstrapper)
 [![Total Downloads](https://poser.pugx.org/cornford/bootstrapper/d/total.png)](https://packagist.org/packages/cornford/bootstrapper)
