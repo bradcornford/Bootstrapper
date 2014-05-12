@@ -1,0 +1,25 @@
+{
+    "name": "cornford/bootstrapper",
+    "description": "An easy way to intergrate Twitter Bootstrap with Laravel 4.",
+    "keywords": ["laravel", "bootstrap", "twitter", "form", "alerts", "views", "templates"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bradley Cornford",
+            "email": "me@bradleycornford.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "dev-develop"
+    },
+    "autoload": {
+        "psr-0": {
+            "Cornford\\Bootstrapper": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
