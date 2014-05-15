@@ -9,6 +9,8 @@ interface LinkableInterface {
 	 * @param string $title
 	 * @param array  $attributes
 	 * @param string $secure
+	 *
+	 * @return string
 	 */
 	public function link($url, $title = null, array $attributes = array(), $secure = null);
 
@@ -19,6 +21,8 @@ interface LinkableInterface {
 	 * @param string $title
 	 * @param array  $attributes
 	 * @param string $secure
+	 *
+	 * @return string
 	 */
 	public function secureLink($url, $title = null, array $attributes = array(), $secure = null);
 
@@ -29,6 +33,8 @@ interface LinkableInterface {
 	 * @param string $title
 	 * @param array  $parameters
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function linkRoute($name, $title = null, array $parameters = array(), array $attributes = array());
 
@@ -39,6 +45,8 @@ interface LinkableInterface {
 	 * @param string $title
 	 * @param array  $parameters
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function linkAction($action, $title = null, array $parameters = array(), array $attributes = array());
 
@@ -48,6 +56,8 @@ interface LinkableInterface {
 	 * @param string $email
 	 * @param string $title
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function mailto($email, $title = null, array $attributes = array());
 

@@ -1,12 +1,14 @@
 <?php namespace Cornford\Bootstrapper\Contracts;
 
-interface IncludableIterface {
+interface IncludableInterface {
 
 	/**
 	 * Include the Bootstrap CDN / Local CSS file
 	 *
 	 * @param string $type
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function css($type = 'cdn', array $attributes = array());
 
@@ -15,6 +17,8 @@ interface IncludableIterface {
 	 *
 	 * @param string $type
 	 * @param array $attributes
+	 *
+	 * @return string
 	 */
 	public function js($type = 'cdn', array $attributes = array());
 

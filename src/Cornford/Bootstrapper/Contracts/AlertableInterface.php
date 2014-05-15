@@ -3,48 +3,58 @@
 interface AlertableInterface {
 
 	/**
-	 * Create an alert none item.
+	 * Create a none alert item.
 	 *
 	 * @param string  $content
-	 * @param array   $attributes
-	 * @param boolean $dismissable
+     * @param boolean $dismissible
+     * @param array   $attributes
+	 *
+	 * @return string
 	 */
-	public function alertNone($content = null, $dismissable = false, array $attributes = array());
+	public function none($content = null, $dismissible = false, array $attributes = array());
 
 	/**
-	 * Create an alert success item.
+	 * Create a success alert item.
 	 *
 	 * @param string  $content
-	 * @param array   $attributes
-	 * @param boolean $dismissable
+     * @param boolean $dismissible
+     * @param array   $attributes
+	 *
+	 * @return string
 	 */
-	public function alertSuccess($content = null, $dismissable = false, array $attributes = array());
+	public function success($content = null, $dismissible = false, array $attributes = array());
 
 	/**
-	 * Create an alert info item.
+	 * Create an info alert item.
 	 *
 	 * @param string  $content
-	 * @param array   $attributes
-	 * @param boolean $dismissable
+     * @param boolean $dismissible
+     * @param array   $attributes
+	 *
+	 * @return string
 	 */
-	public function alertInfo($content = null, $dismissable = false, array $attributes = array());
+	public function info($content = null, $dismissible = false, array $attributes = array());
 
 	/**
-	 * Create an alert warning item.
+	 * Create a warning alert item.
 	 *
 	 * @param string  $content
-	 * @param array   $attributes
-	 * @param boolean $dismissable
+     * @param boolean $dismissible
+     * @param array   $attributes
+	 *
+	 * @return string
 	 */
-	public function alertWarning($content = null, $dismissable = false, array $attributes = array());
+	public function warning($content = null, $dismissible = false, array $attributes = array());
 
 	/**
-	 * Create an alert danger item.
+	 * Create a danger alert item.
 	 *
 	 * @param string  $content
-	 * @param array   $attributes
-	 * @param boolean $dismissable
+     * @param boolean $dismissible
+     * @param array   $attributes
+	 *
+	 * @return string
 	 */
-	public function alertDanger($content = null, $dismissable = false, array $attributes = array());
+	public function danger($content = null, $dismissible = false, array $attributes = array());
 
 }
