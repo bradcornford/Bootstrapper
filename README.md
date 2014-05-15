@@ -26,11 +26,11 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 - `Bootstrap::linkRoute`
 - `Bootstrap::linkAction`
 - `Bootstrap::mailto`
-- `Bootstrap::alertNone`
-- `Bootstrap::alertSuccess`
-- `Bootstrap::alertInfo`
-- `Bootstrap::alertWarning`
-- `Bootstrap::alertDanger`
+- `Bootstrap::none`
+- `Bootstrap::success`
+- `Bootstrap::info`
+- `Bootstrap::warning`
+- `Bootstrap::danger`
 
 ## Installation
 
@@ -64,7 +64,6 @@ This will give you access to
 
 - [CSS](#css)
 - [JS](#js)
-- [Token](#token)
 - [Text](#text)
 - [Password](#password)
 - [Email](#email)
@@ -81,11 +80,11 @@ This will give you access to
 - [Link Route](#linkRoute)
 - [Link Action](#linkAction)
 - [Mailto](#mailto)
-- [Alert None](#alertNone)
-- [Alert Success](#alertSuccess)
-- [Alert Info](#alertInfo)
-- [Alert Warning](#alertWarning)
-- [Alert Danger](#alertDanger)
+- [None Alert](#noneAlert)
+- [Success Alert](#successAlert)
+- [Info Alert](#infoAlert)
+- [Warning Alert](#warningAlert)
+- [Danger Alert](#dangerAlert)
 
 ### CSS
 
@@ -101,53 +100,47 @@ The `js` method includes Bootstrap JS via either a CDN / Local file, and pass op
 	Bootstrap::js();
 	Bootstrap::js('local', ['type' => 'text/javascript']);
 
-### Token
-
-The `token` method generates a hidden field with the current CSRF token.
-
-	Bootstrap::token();
-
 ### Text
 
 The `text` method generates a text field with an optional label, from errors and options.
 
-	Bootstrap::text('text', 'Text', $errors);
+	Bootstrap::text('text', 'Text', 'Value', $errors);
 
 ### Password
 
 The `password` method generates a password field with an optional label, from errors and options.
 
-	Bootstrap::password('password', 'Password', $errors);
+	Bootstrap::password('password', 'Password');
 
 ### Email
 
 The `email` method generates an email field with an optional label, from errors and options.
 
-	Bootstrap::email('email', 'Email address', $errors);
+	Bootstrap::email('email', 'Email address', 'Value');
 
 ### File
 
 The `file` method generates a file field with an optional label, from errors and options.
 
-	Bootstrap::file('file', 'File', $errors);
+	Bootstrap::file('file', 'File');
 
 ### Textarea
 
 The `textarea` method generates a textarea field with an optional label, from errors and options.
 
-	Bootstrap::textarea('file', 'File', $errors);
+	Bootstrap::textarea('file', 'File', 'Value');
 
 ### Select
 
 The `select` method generates a select field with items and an optional label, selected item, from errors and options.
 
-	Bootstrap::select('select', 'Select', ['1' => 'Item 1', '2' => 'Item 2'], 1, $errors);
+	Bootstrap::select('select', 'Select', ['1' => 'Item 1', '2' => 'Item 2'], 2);
 
 ### Checkbox
 
 The `checkbox` method generates a checkbox field with a value and an optional label, checked and options.
 
-	Bootstrap::checkbox('checkbox', 'Checkbox', 1);
+	Bootstrap::checkbox('checkbox', 'Checkbox', 1, true);
 
 ### Radio
 
@@ -203,35 +196,35 @@ The `mailto` method generates a mailto link button with an email address, title 
 
 	Bootstrap::mailto('test@test.com', 'Email');
 
-### Alert None
+### None Alert
 
-The `alertNone` method generates a none alert with content and optionally be dismissible and optional attributes.
+The `none` method generates a none alert with content and optionally be dismissible and optional attributes.
 
-	Bootstrap::alertNone('A message', true);
+	Bootstrap::none('A message', true);
 
-### Alert Success
+### Success Alert
 
-The `alertSuccess` method generates a success alert with content and optionally be dismissible and optional attributes.
+The `success` method generates a success alert with content and optionally be dismissible and optional attributes.
 
-	Bootstrap::alertSuccess('A success message', true);
+	Bootstrap::success('A success message', true);
 
-### Alert Info
+### Info Alert
 
-The `alertInfo` method generates an info alert with content and optionally be dismissible and optional attributes.
+The `info` method generates an info alert with content and optionally be dismissible and optional attributes.
 
-	Bootstrap::alertInfo('An info message', true);
+	Bootstrap::info('An info message', true);
 
-### Alert Warning
+### Warning Alert
 
-The `alertWarning` method generates a warning alert with content and optionally be dismissible and optional attributes.
+The `warning` method generates a warning alert with content and optionally be dismissible and optional attributes.
 
-	Bootstrap::alertWarning('A warning message', true);
+	Bootstrap::warning('A warning message', true);
 
-### Alert Danger
+### Danger Alert
 
-The `alertDanger` method generates a danger alert with content and optionally be dismissible and optional attributes.
+The `danger` method generates a danger alert with content and optionally be dismissible and optional attributes.
 
-	Bootstrap::alertDanger('A danger message', true);
+	Bootstrap::danger('A danger message', true);
 
 ### License
 

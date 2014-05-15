@@ -3,19 +3,15 @@
 interface FormableInterface {
 
 	/**
-	 * Generate a hidden field with the current CSRF token.
-	 */
-	public function token();
-
-	/**
 	 * Create a form text field.
 	 *
 	 * @param string  $name
 	 * @param string  $label
+     * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
 	 */
-	public function text($name, $label = null, $errors = false, array $options = array());
+	public function text($name, $label = null, $value = null, $errors = false, array $options = array());
 
 	/**
 	 * Create a form password field.
@@ -32,10 +28,13 @@ interface FormableInterface {
 	 *
 	 * @param string  $name
 	 * @param string  $label
+     * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
+	 *
+	 * @return string
 	 */
-	public function email($name, $label = null, $errors = false, array $options = array());
+	public function email($name, $label = null, $value = null, $errors = false, array $options = array());
 
 	/**
 	 * Create a form file field.
@@ -44,6 +43,8 @@ interface FormableInterface {
 	 * @param string  $label
 	 * @param boolean $errors
 	 * @param array   $options
+	 *
+	 * @return string
 	 */
 	public function file($name, $label = null, $errors = false, array $options = array());
 
@@ -52,10 +53,13 @@ interface FormableInterface {
 	 *
 	 * @param string  $name
 	 * @param string  $label
+     * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
+	 *
+	 * @return string
 	 */
-	public function textarea($name, $label = null, $errors = false, array $options = array());
+	public function textarea($name, $label = null, $value = null, $errors = false, array $options = array());
 
 	/**
 	 * Create a form select field.
@@ -65,17 +69,21 @@ interface FormableInterface {
 	 * @param array  $list
 	 * @param string $selected
 	 * @param array  $options
+	 *
+	 * @return string
 	 */
 	public function select($name, $label = null, array $list = array(), $selected = null, array $options = array());
 
 	/**
 	 * Create a form checkbox field.
 	 *
-	 * @param string $name
-	 * @param string $label
-	 * @param string $value
-	 * @param string $checked
-	 * @param array  $options
+	 * @param string  $name
+	 * @param string  $label
+	 * @param integer $value
+	 * @param string  $checked
+	 * @param array   $options
+	 *
+	 * @return string
 	 */
 	public function checkbox($name, $label = null, $value = 1, $checked = null, array $options = array());
 
@@ -87,6 +95,8 @@ interface FormableInterface {
 	 * @param string $value
 	 * @param string $checked
 	 * @param array  $options
+	 *
+	 * @return string
 	 */
 	public function radio($name, $label = null, $value = null, $checked = null, array $options = array());
 
@@ -95,6 +105,8 @@ interface FormableInterface {
 	 *
 	 * @param string $value
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function submit($value, array $attributes = array());
 
@@ -103,6 +115,8 @@ interface FormableInterface {
 	 *
 	 * @param string $value
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function button($value, array $attributes = array());
 
@@ -111,6 +125,8 @@ interface FormableInterface {
 	 *
 	 * @param string $value
 	 * @param array  $attributes
+	 *
+	 * @return string
 	 */
 	public function reset($value, array $attributes = array());
 

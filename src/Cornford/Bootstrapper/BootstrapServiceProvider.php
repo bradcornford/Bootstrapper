@@ -1,6 +1,9 @@
 <?php namespace Cornford\Bootstrapper;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Form;
+use Illuminate\Support\Facades\HTML;
+use Illuminate\Support\Facades\Input;
 
 class BootstrapServiceProvider extends ServiceProvider {
 
@@ -9,7 +12,7 @@ class BootstrapServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = true;
 
 	/**
 	 * Bootstrap the application events.
@@ -22,26 +25,30 @@ class BootstrapServiceProvider extends ServiceProvider {
 	}
 
 	/**
-     * Register the service provider.
+	 * Register the service provider.
 	 *
 	 * @return void
 	 */
-    public function register()
-    {
-        $this->app['bootstrap'] = $this->app->share(function()
-        {
-			return new Bootstrap;
-        });
-    }
+	public function register()
+	{
+		$this->app['bootstrap'] = $this->app->share(function()
+		{
+			return new Bootstrap(
+				$this->app->make('Illuminate\Html\FormBuilder'),
+				$this->app->make('Illuminate\Html\HtmlBuilder'),
+				$this->app->make('Illuminate\Http\Request')
+			);
+		});
+	}
 
-    /**
-     * Get the services provided by the provider.
+	/**
+	 * Get the services provided by the provider.
 	 *
-     * @return array
-     */
-    public function provides()
-    {
-	    return array('bootstrap');
+	 * @return array
+	 */
+	public function provides()
+	{
+		return array('bootstrap');
 	}
 
 }
