@@ -1,4 +1,4 @@
-# Fast Bootstrap integration with Laravel 4
+# Fast Bootstrap integration with Laravel
 
 [![Latest Stable Version](https://poser.pugx.org/cornford/bootstrapper/version.png)](https://packagist.org/packages/cornford/bootstrapper)
 [![Total Downloads](https://poser.pugx.org/cornford/bootstrapper/d/total.png)](https://packagist.org/packages/cornford/bootstrapper)
@@ -34,23 +34,23 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 
 ## Installation
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/alerter`.
+Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/bootstrapper`.
 
-	"require-dev": {
+	"require": {
 		"cornford/bootstrapper": "1.*"
 	}
 
 Next, update Composer from the Terminal:
 
-	composer update --dev
+	composer update
 
 Once this operation completes, the next step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
 
-	'Cornford\Alerter\AlerterServiceProvider'
+	'Cornford\Bootstrapper\BootstrapServiceProvider',
 
 The final step is to introduce the facade. Open `app/config/app.php`, and add a new item to the aliases array.
 
-	'Bootstrap'            => 'Cornford\Bootstrapper\Facades\Bootstrap',
+	'Bootstrap'       => 'Cornford\Bootstrapper\Facades\Bootstrap',
 
 That's it! You're all set to go.
 
