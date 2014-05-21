@@ -22,15 +22,15 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 - `Bootstrap::button`
 - `Bootstrap::reset`
 - `Bootstrap::link`
-- `Bootstrap::secure-link`
-- `Bootstrap::link-route`
-- `Bootstrap::link-action`
+- `Bootstrap::secureLink`
+- `Bootstrap::linkRoute`
+- `Bootstrap::linkAction`
 - `Bootstrap::mailto`
-- `Bootstrap::none-alert`
-- `Bootstrap::success-alert`
-- `Bootstrap::info-alert`
-- `Bootstrap::warning-alert`
-- `Bootstrap::danger-alert`
+- `Bootstrap::none`
+- `Bootstrap::success`
+- `Bootstrap::info`
+- `Bootstrap::warning`
+- `Bootstrap::danger`
 
 ## Installation
 
@@ -76,15 +76,15 @@ This will give you access to
 - [Button](#button)
 - [Reset](#reset)
 - [Link](#link)
-- [Secure Link](#secureLink)
-- [Link Route](#linkRoute)
-- [Link Action](#linkAction)
+- [Secure Link](#secure-link)
+- [Link Route](#link-route)
+- [Link Action](#link-action)
 - [Mailto](#mailto)
-- [None Alert](#noneAlert)
-- [Success Alert](#successAlert)
-- [Info Alert](#infoAlert)
-- [Warning Alert](#warningAlert)
-- [Danger Alert](#dangerAlert)
+- [None Alert](#none-alert)
+- [Success Alert](#success-alert)
+- [Info Alert](#info-alert)
+- [Warning Alert](#warning-alert)
+- [Danger Alert](#danger-alert)
 
 ### CSS
 
