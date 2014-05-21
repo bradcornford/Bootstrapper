@@ -22,15 +22,15 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 - `Bootstrap::button`
 - `Bootstrap::reset`
 - `Bootstrap::link`
-- `Bootstrap::secureLink`
-- `Bootstrap::linkRoute`
-- `Bootstrap::linkAction`
+- `Bootstrap::secure-link`
+- `Bootstrap::link-route`
+- `Bootstrap::link-action`
 - `Bootstrap::mailto`
-- `Bootstrap::none`
-- `Bootstrap::success`
-- `Bootstrap::info`
-- `Bootstrap::warning`
-- `Bootstrap::danger`
+- `Bootstrap::none-alert`
+- `Bootstrap::success-alert`
+- `Bootstrap::info-alert`
+- `Bootstrap::warning-alert`
+- `Bootstrap::danger-alert`
 
 ## Installation
 

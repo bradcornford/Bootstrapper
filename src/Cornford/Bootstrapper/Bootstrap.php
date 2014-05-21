@@ -4,7 +4,6 @@ use Cornford\Bootstrapper\Contracts\IncludableInterface;
 use Cornford\Bootstrapper\Contracts\FormableInterface;
 use Cornford\Bootstrapper\Contracts\LinkableInterface;
 use Cornford\Bootstrapper\Contracts\AlertableInterface;
-use Illuminate\Support\Facades\Form;
 
 class Bootstrap extends BootstrapBase implements IncludableInterface, FormableInterface, LinkableInterface, AlertableInterface {
 
