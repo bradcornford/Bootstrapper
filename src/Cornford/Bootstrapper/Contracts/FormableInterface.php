@@ -7,9 +7,11 @@ interface FormableInterface {
 	 *
 	 * @param string  $name
 	 * @param string  $label
-     * @param string  $value
+	 * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
+	 *
+	 * @return string
 	 */
 	public function text($name, $label = null, $value = null, $errors = false, array $options = array());
 
@@ -20,6 +22,8 @@ interface FormableInterface {
 	 * @param string  $label
 	 * @param boolean $errors
 	 * @param array   $options
+	 *
+	 * @return string
 	 */
 	public function password($name, $label = null, $errors = false, array $options = array());
 
@@ -28,7 +32,7 @@ interface FormableInterface {
 	 *
 	 * @param string  $name
 	 * @param string  $label
-     * @param string  $value
+	 * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
 	 *
@@ -53,7 +57,7 @@ interface FormableInterface {
 	 *
 	 * @param string  $name
 	 * @param string  $label
-     * @param string  $value
+	 * @param string  $value
 	 * @param boolean $errors
 	 * @param array   $options
 	 *

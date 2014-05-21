@@ -76,15 +76,15 @@ This will give you access to
 - [Button](#button)
 - [Reset](#reset)
 - [Link](#link)
-- [Secure Link](#secureLink)
-- [Link Route](#linkRoute)
-- [Link Action](#linkAction)
+- [Secure Link](#secure-link)
+- [Link Route](#link-route)
+- [Link Action](#link-action)
 - [Mailto](#mailto)
-- [None Alert](#noneAlert)
-- [Success Alert](#successAlert)
-- [Info Alert](#infoAlert)
-- [Warning Alert](#warningAlert)
-- [Danger Alert](#dangerAlert)
+- [None Alert](#none-alert)
+- [Success Alert](#success-alert)
+- [Info Alert](#info-alert)
+- [Warning Alert](#warning-alert)
+- [Danger Alert](#danger-alert)
 
 ### CSS
 

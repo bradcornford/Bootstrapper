@@ -1,9 +1,6 @@
 <?php namespace Cornford\Bootstrapper;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Form;
-use Illuminate\Support\Facades\HTML;
-use Illuminate\Support\Facades\Input;
 
 class BootstrapServiceProvider extends ServiceProvider {
 
