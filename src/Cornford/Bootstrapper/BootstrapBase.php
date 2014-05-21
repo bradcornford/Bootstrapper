@@ -236,7 +236,7 @@ abstract class BootstrapBase {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
-		$return .= '<strong>' . ucwords($type) . '!</strong> ' . $content . '</div>';
+		$return .= $content . '</div>';
 
 		return $return;
 	}
