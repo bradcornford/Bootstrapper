@@ -295,70 +295,75 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 * Create a none alert item.
 	 *
 	 * @param string  $content
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
 	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	public function none($content = null, $dismissible = false, array $attributes = array())
+	public function none($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
-		return $this->alert('message', $content, $dismissible, $attributes);
+		return $this->alert('message', $content, $emphasis, $dismissible, $attributes);
 	}
 
 	/**
 	 * Create a success alert item.
 	 *
 	 * @param string  $content
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
 	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	public function success($content = null, $dismissible = false, array $attributes = array())
+	public function success($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
-		return $this->alert('success', $content, $dismissible, $attributes);
+		return $this->alert('success', $content, $emphasis, $dismissible, $attributes);
 	}
 
 	/**
 	 * Create an info alert item.
 	 *
 	 * @param string  $content
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
 	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	public function info($content = null, $dismissible = false, array $attributes = array())
+	public function info($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
-		return $this->alert('info', $content, $dismissible, $attributes);
+		return $this->alert('info', $content, $emphasis, $dismissible, $attributes);
 	}
 
 	/**
 	 * Create a warning alert item.
 	 *
 	 * @param string  $content
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
 	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	public function warning($content = null, $dismissible = false, array $attributes = array())
+	public function warning($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
-		return $this->alert('warning', $content, $dismissible, $attributes);
+		return $this->alert('warning', $content, $emphasis, $dismissible, $attributes);
 	}
 
 	/**
 	 * Create a danger alert item.
 	 *
 	 * @param string  $content
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
 	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	public function danger($content = null, $dismissible = false, array $attributes = array())
+	public function danger($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
-		return $this->alert('danger', $content, $dismissible, $attributes);
+		return $this->alert('danger', $content, $emphasis, $dismissible, $attributes);
 	}
 
 }
