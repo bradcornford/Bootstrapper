@@ -301,7 +301,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 *
 	 * @return string
 	 */
-	public function none($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	public function none($content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		return $this->alert('message', $content, $emphasis, $dismissible, $attributes);
 	}
@@ -316,7 +316,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 *
 	 * @return string
 	 */
-	public function success($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	public function success($content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		return $this->alert('success', $content, $emphasis, $dismissible, $attributes);
 	}
@@ -331,7 +331,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 *
 	 * @return string
 	 */
-	public function info($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	public function info($content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		return $this->alert('info', $content, $emphasis, $dismissible, $attributes);
 	}
@@ -346,7 +346,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 *
 	 * @return string
 	 */
-	public function warning($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	public function warning($content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		return $this->alert('warning', $content, $emphasis, $dismissible, $attributes);
 	}
@@ -361,7 +361,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 *
 	 * @return string
 	 */
-	public function danger($content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	public function danger($content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		return $this->alert('danger', $content, $emphasis, $dismissible, $attributes);
 	}
