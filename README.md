@@ -198,33 +198,33 @@ The `mailto` method generates a mailto link button with an email address, title 
 
 ### None Alert
 
-The `none` method generates a none alert with content and optionally be dismissible and optional attributes.
+The `none` method generates a none alert with content with optional emphasis, optionally be dismissible, and optional attributes.
 
-	Bootstrap::none('A message', true);
+	Bootstrap::none('A message', null, true);
 
 ### Success Alert
 
-The `success` method generates a success alert with content and optionally be dismissible and optional attributes.
+The `success` method generates a success alert with content with optional emphasis, optionally be dismissible, and optional attributes.
 
-	Bootstrap::success('A success message', true);
+	Bootstrap::success('A success message', 'Well done!', true);
 
 ### Info Alert
 
-The `info` method generates an info alert with content and optionally be dismissible and optional attributes.
+The `info` method generates an info alert with content with optional emphasis, optionally be dismissible, and optional attributes.
 
-	Bootstrap::info('An info message', true);
+	Bootstrap::info('An info message', 'Heads up!', true);
 
 ### Warning Alert
 
-The `warning` method generates a warning alert with content and optionally be dismissible and optional attributes.
+The `warning` method generates a warning alert with content with optional emphasis, optionally be dismissible, and optional attributes.
 
-	Bootstrap::warning('A warning message', true);
+	Bootstrap::warning('A warning message', 'Warning!', true);
 
 ### Danger Alert
 
-The `danger` method generates a danger alert with content and optionally be dismissible and optional attributes.
+The `danger` method generates a danger alert with content with optional emphasis, optionally be dismissible, and optional attributes.
 
-	Bootstrap::danger('A danger message', true);
+	Bootstrap::danger('A danger message', 'Oh snap!', true);
 
 ### License
 
