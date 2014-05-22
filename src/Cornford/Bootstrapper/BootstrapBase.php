@@ -2,11 +2,20 @@
 
 namespace Cornford\Bootstrapper;
 
-use Illuminate\Html\FormBuilder as Form;
-use Illuminate\Html\HtmlBuilder as HTML;
-use Illuminate\Http\Request as Input;
+use Illuminate\Html\FormBuilder;
+use Illuminate\Html\HtmlBuilder;
+use Illuminate\Http\Request;
 
 abstract class BootstrapBase {
+
+	const CSS_BOOTSTRAP_CDN = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_LOCAL = 'assets/css/bootstrap.min.css';
+
+	const JS_BOOTSTRAP_CDN = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_LOCAL = 'assets/js/bootstrap.min.js';
+
+	const JS_JQUERY_CDN = '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js';
+	const JS_JQUERY_LOCAL = 'assets/js/jquery.min.js';
 
 	/**
 	 * Form
@@ -29,7 +38,7 @@ abstract class BootstrapBase {
 	 */
 	protected $input;
 
-	public function __construct(Form $form, HTML $html, Input $input)
+	public function __construct(FormBuilder $form, HtmlBuilder $html, Request $input)
 	{
 		$this->form = $form;
 		$this->html = $html;
@@ -48,6 +57,40 @@ abstract class BootstrapBase {
 	protected function add($type, $location, array $attributes = array())
 	{
 		return $this->html->$type(asset($location), $attributes);
+	}
+
+	/**
+	 * Create a form label field.
+	 *
+	 * @param string $name
+	 * @param string $label
+	 * @param array  $options
+	 *
+	 * @return string
+	 */
+	protected function label($name, $label = null, array $options = array()) {
+		if ($label) {
+			return $this->form->label($name, $label, $options);
+		}
+
+		return '';
+	}
+
+	/**
+	 * Create a form error helper field.
+	 *
+	 * @param string                         $name
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param string                         $wrap
+	 *
+	 * @return string
+	 */
+	protected function errors($name, $errors = null, $wrap = '<span class="help-block">:message</span>') {
+		if ($errors && $errors->has($name)) {
+			return $errors->first($name, $wrap);
+		}
+
+		return '';
 	}
 
 	/**
@@ -73,9 +116,7 @@ abstract class BootstrapBase {
 
 		$return .= '">';
 
-		if ($label) {
-			$return .= $this->form->label($name, $label);
-		}
+		$return .= $this->label($name, $label);
 
 		if (!$value) {
 			$value = $this->input->get($name);
@@ -96,9 +137,7 @@ abstract class BootstrapBase {
 				$return .= $this->form->input($type, $name, $value, $options);
 		}
 
-		if ($errors && $errors->has($name)) {
-			$return .= $errors->first($name, '<span class="help-block">:message</span>');
-		}
+        $return .= $this->errors($name, $errors);
 
 		$return .= '</div>';
 
@@ -122,9 +161,7 @@ abstract class BootstrapBase {
 
 		$return = '';
 
-		if ($label) {
-			$return .= $this->form->label($name, $label);
-		}
+		$return .= $this->label($name, $label);
 
 		$return .= $this->form->select($name, $list, $selected, $options);
 
@@ -147,9 +184,7 @@ abstract class BootstrapBase {
 	{
 		$return = '<div class="' . $type . '">';
 
-		if ($label) {
-			$return .= $this->form->label($name, $label);
-		}
+		$return .= $this->label($name, $label);
 
 		$return .= $this->form->$type($name, $value, $checked, $options) . '</div>';
 
