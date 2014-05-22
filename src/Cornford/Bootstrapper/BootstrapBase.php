@@ -151,7 +151,7 @@ abstract class BootstrapBase {
 	 * @param string $label
 	 * @param array  $list
 	 * @param string $selected
-	 * @param array  $options
+	 * @param \Illuminate\Support\MessageBag|null  $options
 	 *
 	 * @return string
 	 */
