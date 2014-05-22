@@ -5,78 +5,79 @@ interface FormableInterface {
 	/**
 	 * Create a form text field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function text($name, $label = null, $value = null, $errors = false, array $options = array());
+	public function text($name, $label = null, $value = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form password field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function password($name, $label = null, $errors = false, array $options = array());
+	public function password($name, $label = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form email field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function email($name, $label = null, $value = null, $errors = false, array $options = array());
+	public function email($name, $label = null, $value = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form file field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function file($name, $label = null, $errors = false, array $options = array());
+	public function file($name, $label = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form textarea field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function textarea($name, $label = null, $value = null, $errors = false, array $options = array());
+	public function textarea($name, $label = null, $value = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form select field.
 	 *
-	 * @param string $name
-	 * @param string $label
-	 * @param array  $list
-	 * @param string $selected
-	 * @param array  $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param array                          $list
+	 * @param string                         $selected
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function select($name, $label = null, array $list = array(), $selected = null, array $options = array());
+	public function select($name, $label = null, array $list = array(), $selected = null, $errors = null, array $options = array());
 
 	/**
 	 * Create a form checkbox field.
