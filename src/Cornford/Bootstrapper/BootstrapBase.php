@@ -212,7 +212,7 @@ abstract class BootstrapBase {
 	}
 
 	/**
-	 * Create an alert item.
+	 * Create an alert item with optional emphasis.
 	 *
 	 * @param string  $type
 	 * @param string  $content
@@ -227,7 +227,7 @@ abstract class BootstrapBase {
 		$class = '';
 
 		if($emphasis && is_string($emphasis)){
-			$content = '<strong>' . $emphasis . '</strong> ' . $content;
+			$content = '<strong>' . $emphasis . '</strong> ' . $content; 
 		}
 		
 		if ($dismissible) {
