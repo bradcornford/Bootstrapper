@@ -222,7 +222,7 @@ abstract class BootstrapBase {
 	 *
 	 * @return string
 	 */
-	protected function alert($type = 'message', $content = null, $emphasis = false, $dismissible = false, array $attributes = array())
+	protected function alert($type = 'message', $content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
 		$class = '';
 
