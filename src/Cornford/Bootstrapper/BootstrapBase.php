@@ -216,15 +216,20 @@ abstract class BootstrapBase {
 	 *
 	 * @param string  $type
 	 * @param string  $content
-	 * @param array   $attributes
+	 * @param string  $emphasis
 	 * @param boolean $dismissible
+	 * @param array   $attributes
 	 *
 	 * @return string
 	 */
-	protected function alert($type = 'message', $content = null, $dismissible = false, array $attributes = array())
+	protected function alert($type = 'message', $content = null, $emphasis = false, $dismissible = false, array $attributes = array())
 	{
 		$class = '';
 
+		if($emphasis && is_string($emphasis)){
+			$content = '<strong>' . $emphasis . '</strong> ' . $content;
+		}
+		
 		if ($dismissible) {
 			$class = 'alert-dismissable';
 		}
@@ -236,7 +241,7 @@ abstract class BootstrapBase {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
-		$return .= '<strong>' . ucwords($type) . '!</strong> ' . $content . '</div>';
+		$return .= $content . '</div>';
 
 		return $return;
 	}
