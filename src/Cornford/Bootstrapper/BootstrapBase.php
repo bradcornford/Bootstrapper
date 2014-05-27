@@ -21,6 +21,15 @@ abstract class BootstrapBase {
 	const JS_JQUERY_CDN = '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js';
 	const JS_JQUERY_LOCAL = 'assets/js/jquery.min.js';
 
+	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js';
+	const JS_MOMENT_LOCAL = 'assets/js/moment.min.js';
+
+	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js';
+	const JS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.js';
+
+	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css';
+	const CSS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.css';
+
 	/**
 	 * Form
 	 *
@@ -195,10 +204,11 @@ abstract class BootstrapBase {
 	 * @param string                         $label
 	 * @param \Illuminate\Support\MessageBag $errors
 	 * @param array                          $options
+	 * @param array                          $parameters
 	 *
 	 * @return string
 	 */
-	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array())
+	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
 	{
 		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label), $options);
 
@@ -214,6 +224,27 @@ abstract class BootstrapBase {
 		}
 
 		switch ($type) {
+			case 'datetime':
+			case 'date':
+			case 'time':
+					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
+					$return .= $this->form->text($name, $value, $options);
+					$return .= '<span class="input-group-addon"><span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span></span></div>';
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({';
+
+					switch ($type) {
+						case 'time':
+							$return .= 'pickDate: false, ';
+							break;
+						case 'date':
+							$return .= 'pickTime: false, ';
+							break;
+						case 'datetime':
+						default:
+					}
+					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '", '; }, $parameters, array_keys($parameters)));
+					$return .= '}); });</script>';
+				break;
 			case 'password':
 			case 'file':
 				$return .= $this->form->$type($name, $options) . "\n";
