@@ -242,7 +242,7 @@ abstract class BootstrapBase {
 						case 'datetime':
 						default:
 					}
-					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '", '; }, $parameters, array_keys($parameters)));
+					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '"'; }, $parameters, array_keys($parameters)));
 					$return .= '}); });</script>';
 				break;
 			case 'password':
