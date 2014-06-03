@@ -4,7 +4,6 @@ use Cornford\Bootstrapper\Contracts\IncludableInterface;
 use Cornford\Bootstrapper\Contracts\FormableInterface;
 use Cornford\Bootstrapper\Contracts\LinkableInterface;
 use Cornford\Bootstrapper\Contracts\AlertableInterface;
-use Illuminate\Support\Facades\Form;
 
 class Bootstrap extends BootstrapBase implements IncludableInterface, FormableInterface, LinkableInterface, AlertableInterface {
 
@@ -21,11 +20,13 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('style', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', $attributes);
+				return $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
+					$this->add('style', self::CSS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('style', asset('assets/css/bootstrap.min.css'), $attributes);
+				return $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
+					$this->add('style', asset(self::CSS_DATETIME_LOCAL), $attributes);
 		}
 	}
 
@@ -42,28 +43,32 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return  $this->add('script', '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', $attributes) .
-					$this->add('script', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', $attributes);
+				return $this->add('script', self::JS_JQUERY_CDN, $attributes) .
+					$this->add('script', self::JS_BOOTSTRAP_CDN, $attributes) .
+				$this->add('script', self::JS_MOMENT_CDN, $attributes) .
+				$this->add('script', self::JS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('script', asset('assets/js/jquery.min.js'), $attributes) .
-					$this->add('script', asset('assets/js/bootstrap.min.js'), $attributes);
+				return $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
+					$this->add('script', asset(self::JS_BOOTSTRAP_LOCAL), $attributes) .
+					$this->add('script', asset(self::JS_MOMENT_LOCAL), $attributes) .
+					$this->add('script', asset(self::JS_DATETIME_LOCAL), $attributes);
 		}
 	}
 
 	/**
 	 * Create a form text field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function text($name, $label = null, $value = null, $errors = false, array $options = array())
+	public function text($name, $label = null, $value = null, $errors = null, array $options = array())
 	{
 		return $this->input('text', $name, $label, $value, $errors, $options);
 	}
@@ -71,14 +76,14 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	/**
 	 * Create a form password field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function password($name, $label = null, $errors = false, array $options = array())
+	public function password($name, $label = null, $errors = null, array $options = array())
 	{
 		return $this->input('password', $name, $label, null, $errors, $options);
 	}
@@ -86,15 +91,15 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	/**
 	 * Create a form email field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function email($name, $label = null, $value = null, $errors = false, array $options = array())
+	public function email($name, $label = null, $value = null, $errors = null, array $options = array())
 	{
 		return $this->input('email', $name, $label, $value, $errors, $options);
 	}
@@ -102,30 +107,81 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	/**
 	 * Create a form file field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function file($name, $label = null, $errors = false, array $options = array())
+	public function file($name, $label = null, $errors = null, array $options = array())
 	{
 		return $this->input('file', $name, $label, null, $errors, $options);
 	}
 
 	/**
-	 * Create a form textarea field.
+	 * Create a form date field.
 	 *
-	 * @param string  $name
-	 * @param string  $label
-	 * @param string  $value
-	 * @param boolean $errors
-	 * @param array   $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
 	 *
 	 * @return string
 	 */
-	public function textarea($name, $label = null, $value = null, $errors = false, array $options = array())
+	public function date($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('date', $name, $label, $value, $errors, $options, $parameters);
+	}
+
+	/**
+	 * Create a form datetime field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function datetime($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('datetime', $name, $label, $value, $errors, $options, $parameters);
+	}
+
+	/**
+	 * Create a form time field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function time($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('time', $name, $label, $value, $errors, $options, $parameters);
+	}
+
+	/**
+	 * Create a form textarea field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function textarea($name, $label = null, $value = null, $errors = null, array $options = array())
 	{
 		return $this->input('textarea', $name, $label, $value, $errors, $options);
 	}
@@ -133,17 +189,18 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	/**
 	 * Create a form select field.
 	 *
-	 * @param string $name
-	 * @param string $label
-	 * @param array  $list
-	 * @param string $selected
-	 * @param array  $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param array                          $list
+	 * @param string                         $selected
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	public function select($name, $label = null, array $list = array(), $selected = null, array $options = array())
+	public function select($name, $label = null, array $list = array(), $selected = null, $errors = null, array $options = array())
 	{
-		return $this->options($name, $label, $list, $selected, $options);
+		return $this->options($name, $label, $list, $selected, $errors, $options);
 	}
 
 	/**
