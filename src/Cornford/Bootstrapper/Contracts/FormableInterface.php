@@ -53,6 +53,48 @@ interface FormableInterface {
 	public function file($name, $label = null, $errors = null, array $options = array());
 
 	/**
+	 * Create a form date field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function date($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array());
+
+	/**
+	 * Create a form datetime field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function datetime($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array());
+
+	/**
+	 * Create a form time field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function time($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array());
+
+	/**
 	 * Create a form textarea field.
 	 *
 	 * @param string                         $name

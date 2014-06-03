@@ -20,11 +20,13 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes);
+				return $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
+					$this->add('style', self::CSS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes);
+				return $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
+					$this->add('style', asset(self::CSS_DATETIME_LOCAL), $attributes);
 		}
 	}
 
@@ -41,13 +43,17 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return  $this->add('script', self::JS_JQUERY_CDN, $attributes) .
-					$this->add('script', self::JS_BOOTSTRAP_CDN, $attributes);
+				return $this->add('script', self::JS_JQUERY_CDN, $attributes) .
+					$this->add('script', self::JS_BOOTSTRAP_CDN, $attributes) .
+				$this->add('script', self::JS_MOMENT_CDN, $attributes) .
+				$this->add('script', self::JS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
 				return $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
-					$this->add('script', asset(self::JS_LOCAL), $attributes);
+					$this->add('script', asset(self::JS_BOOTSTRAP_LOCAL), $attributes) .
+					$this->add('script', asset(self::JS_MOMENT_LOCAL), $attributes) .
+					$this->add('script', asset(self::JS_DATETIME_LOCAL), $attributes);
 		}
 	}
 
@@ -111,6 +117,57 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	public function file($name, $label = null, $errors = null, array $options = array())
 	{
 		return $this->input('file', $name, $label, null, $errors, $options);
+	}
+
+	/**
+	 * Create a form date field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function date($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('date', $name, $label, $value, $errors, $options, $parameters);
+	}
+
+	/**
+	 * Create a form datetime field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function datetime($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('datetime', $name, $label, $value, $errors, $options, $parameters);
+	}
+
+	/**
+	 * Create a form time field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 * @param array                          $parameters
+	 *
+	 * @return string
+	 */
+	public function time($name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
+	{
+		return $this->input('time', $name, $label, $value, $errors, $options, $parameters);
 	}
 
 	/**
