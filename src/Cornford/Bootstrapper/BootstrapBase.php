@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 abstract class BootstrapBase {
 
+	const FORM_VERTICAL = 'vertical';
+	const FORM_HORIZONTAL = 'horizontal';
+	const FORM_INLINE = 'inline';
+
 	const CSS_BOOTSTRAP_CDN = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
 	const CSS_BOOTSTRAP_LOCAL = 'assets/css/bootstrap.min.css';
 
@@ -16,6 +20,15 @@ abstract class BootstrapBase {
 
 	const JS_JQUERY_CDN = '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js';
 	const JS_JQUERY_LOCAL = 'assets/js/jquery.min.js';
+
+	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js';
+	const JS_MOMENT_LOCAL = 'assets/js/moment.min.js';
+
+	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js';
+	const JS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.js';
+
+	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css';
+	const CSS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.css';
 
 	/**
 	 * Form
@@ -38,11 +51,76 @@ abstract class BootstrapBase {
 	 */
 	protected $input;
 
+	/**
+	 * Form Type
+	 *
+	 * @var string
+	 */
+	protected $formType = self::FORM_VERTICAL;
+
+	/**
+	 * Form Input Class
+	 *
+	 * @var string
+	 */
+	protected $inputClass;
+
+	/**
+	 * Form Label Class
+	 *
+	 * @var string
+	 */
+	protected $labelClass;
+
 	public function __construct(FormBuilder $form, HtmlBuilder $html, Request $input)
 	{
 		$this->form = $form;
 		$this->html = $html;
 		$this->input = $input;
+	}
+
+	/**
+	 * Set the form type to vertical
+	 *
+	 * @return self
+	 */
+	public function vertical() {
+		$this->formType = self::FORM_VERTICAL;
+		$this->inputClass = '';
+		$this->labelClass = '';
+
+		return $this;
+	}
+
+	/**
+	 * Set the form type to horizontal
+	 *
+	 * @param string $inputClass
+	 * @param string $labelClass
+	 *
+	 * @return self
+	 */
+	public function horizontal($inputClass = '', $labelClass = '') {
+		$this->formType = self::FORM_HORIZONTAL;
+		$this->inputClass = $inputClass;
+		$this->labelClass = $labelClass;
+
+		return $this;
+	}
+
+	/**
+	 * Set the form type to inline
+	 *
+	 * @param string $labelClass
+	 *
+	 * @return self
+	 */
+	public function inline($labelClass = '') {
+		$this->formType = self::FORM_INLINE;
+		$this->inputClass = '';
+		$this->labelClass = $labelClass;
+
+		return $this;
 	}
 
 	/**
@@ -69,8 +147,10 @@ abstract class BootstrapBase {
 	 * @return string
 	 */
 	protected function label($name, $label = null, array $options = array()) {
+		$options = array_merge(array('class' => 'control-label ' . $this->labelClass), $options);
+
 		if ($label) {
-			return $this->form->label($name, $label, $options);
+			return $this->form->label($name, $label, $options) . "\n";
 		}
 
 		return '';
@@ -87,10 +167,32 @@ abstract class BootstrapBase {
 	 */
 	protected function errors($name, $errors = null, $wrap = '<span class="help-block">:message</span>') {
 		if ($errors && $errors->has($name)) {
-			return $errors->first($name, $wrap);
+			return $errors->first($name, $wrap) . "\n";
 		}
 
 		return '';
+	}
+
+	/**
+	 * Create a form group element.
+	 *
+	 * @param string                         $name
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param string                         $class
+	 *
+	 * @return string
+	 */
+	protected function group($name, $errors = null, $class = 'form-group')
+	{
+		$return = '<div class="' . $class;
+
+		if ($errors && $errors->has($name)) {
+			$return .= ' has-error';
+		}
+
+		$return .= '">' . "\n";
+
+		return $return;
 	}
 
 	/**
@@ -102,44 +204,68 @@ abstract class BootstrapBase {
 	 * @param string                         $label
 	 * @param \Illuminate\Support\MessageBag $errors
 	 * @param array                          $options
+	 * @param array                          $parameters
 	 *
 	 * @return string
 	 */
-	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array())
+	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
 	{
 		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label), $options);
-		$return = '<div class="form-group';
 
-		if ($errors && $errors->has($name)) {
-			$return .= ' has-error';
-		}
-
-		$return .= '">';
-
+		$return = $this->group($name, $errors);
 		$return .= $this->label($name, $label);
 
 		if (!$value) {
 			$value = $this->input->get($name);
 		}
 
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= $this->group('', null, $this->inputClass);
+		}
+
 		switch ($type) {
+			case 'datetime':
+			case 'date':
+			case 'time':
+					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
+					$return .= $this->form->text($name, $value, $options);
+					$return .= '<span class="input-group-addon"><span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span></span></div>';
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({';
+
+					switch ($type) {
+						case 'time':
+							$return .= 'pickDate: false, ';
+							break;
+						case 'date':
+							$return .= 'pickTime: false, ';
+							break;
+						case 'datetime':
+						default:
+					}
+					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '"'; }, $parameters, array_keys($parameters)));
+					$return .= '}); });</script>';
+				break;
 			case 'password':
 			case 'file':
-				$return .= $this->form->$type($name, $options);
+				$return .= $this->form->$type($name, $options) . "\n";
 				break;
 			case 'text':
 			case 'hidden':
 			case 'email':
 			case 'textarea':
-				$return .= $this->form->$type($name, $value, $options);
+				$return .= $this->form->$type($name, $value, $options) . "\n";
 				break;
 			default:
-				$return .= $this->form->input($type, $name, $value, $options);
+				$return .= $this->form->input($type, $name, $value, $options) . "\n";
 		}
 
-        $return .= $this->errors($name, $errors);
+		$return .= $this->errors($name, $errors);
 
-		$return .= '</div>';
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= '</div>' . "\n";
+		}
+
+		$return .= '</div>' . "\n";
 
 		return $return;
 	}
@@ -147,23 +273,34 @@ abstract class BootstrapBase {
 	/**
 	 * Create a form select field.
 	 *
-	 * @param string $name
-	 * @param string $label
-	 * @param array  $list
-	 * @param string $selected
-	 * @param \Illuminate\Support\MessageBag|null  $options
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param array                          $list
+	 * @param string                         $selected
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	protected function options($name, $label = null, array $list = array(), $selected = null, array $options = array())
+	protected function options($name, $label = null, array $list = array(), $selected = null, $errors = null, array $options = array())
 	{
 		$options = array_merge(array('class' => 'form-control'), $options);
 
-		$return = '';
-
+		$return = $this->group($name, $errors);
 		$return .= $this->label($name, $label);
 
-		$return .= $this->form->select($name, $list, $selected, $options);
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= $this->group('', null, $this->inputClass);
+		}
+
+		$return .= $this->form->select($name, $list, $selected, $options) . "\n";
+		$return .= $this->errors($name, $errors);
+
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= '</div>' . "\n";
+		}
+
+		$return .= '</div>' . "\n";
 
 		return $return;
 	}
@@ -182,11 +319,28 @@ abstract class BootstrapBase {
 	 */
 	protected function field($type, $name, $label = null, $value = null, $checked = null, array $options = array())
 	{
-		$return = '<div class="' . $type . '">';
+		$return = '';
 
+		if ($this->formType != self::FORM_INLINE) {
+			$return .= $this->group($name, null);
+		}
+
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= $this->group('', null, $this->inputClass);
+		}
+
+		$return .= '<div class="' . $type . '">' . "\n";
 		$return .= $this->label($name, $label);
+		$return .= $this->form->$type($name, $value, $checked, $options) . "\n";
+		$return .= '</div>' . "\n";
 
-		$return .= $this->form->$type($name, $value, $checked, $options) . '</div>';
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= '</div>' . "\n";
+		}
+
+		if ($this->formType != self::FORM_INLINE) {
+			$return .= '</div>';
+		}
 
 		return $return;
 	}
@@ -212,7 +366,21 @@ abstract class BootstrapBase {
 				$attributes = array_merge(array('class' => 'btn btn-default'), $attributes);
 		}
 
-		return $this->form->$type($value, $attributes);
+		$return = $this->group('', null);
+
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= $this->group('', null, $this->inputClass);
+		}
+
+		$return .= $this->form->$type($value, $attributes) . "\n";
+
+		if ($this->formType == self::FORM_HORIZONTAL) {
+			$return .= '</div>' . "\n";
+		}
+
+		$return .= '</div>' . "\n";
+
+		return $return;
 	}
 
 	/**
