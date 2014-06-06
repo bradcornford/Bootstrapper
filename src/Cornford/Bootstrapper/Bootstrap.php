@@ -17,17 +17,21 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 */
 	public function css($type = 'cdn', array $attributes = array())
 	{
+		$return = '';
+
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
+				$return = $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
 					$this->add('style', self::CSS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
+				$return = $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
 					$this->add('style', asset(self::CSS_DATETIME_LOCAL), $attributes);
 		}
+
+		return $return;
 	}
 
 	/**
@@ -40,21 +44,25 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 */
 	public function js($type = 'cdn', array $attributes = array())
 	{
+		$return = '';
+
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('script', self::JS_JQUERY_CDN, $attributes) .
+				$return = $this->add('script', self::JS_JQUERY_CDN, $attributes) .
 					$this->add('script', self::JS_BOOTSTRAP_CDN, $attributes) .
-				$this->add('script', self::JS_MOMENT_CDN, $attributes) .
-				$this->add('script', self::JS_DATETIME_CDN, $attributes);
+					$this->add('script', self::JS_MOMENT_CDN, $attributes) .
+					$this->add('script', self::JS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
+				$return = $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_BOOTSTRAP_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_MOMENT_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_DATETIME_LOCAL), $attributes);
 		}
+
+		return $return;
 	}
 
 	/**
