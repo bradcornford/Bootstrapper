@@ -17,8 +17,6 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 */
 	public function css($type = 'cdn', array $attributes = array())
 	{
-		$return = '';
-
 		switch($type)
 		{
 			case 'cdn':
@@ -44,8 +42,6 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	 */
 	public function js($type = 'cdn', array $attributes = array())
 	{
-		$return = '';
-
 		switch($type)
 		{
 			case 'cdn':
