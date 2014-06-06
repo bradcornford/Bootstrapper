@@ -124,6 +124,15 @@ abstract class BootstrapBase {
 	}
 
 	/**
+	 * Get the form type
+	 *
+	 * @return string
+	 */
+	public function getFormType() {
+		return $this->formType;
+	}
+
+	/**
 	 * Include the Bootstrap file
 	 *
 	 * @param string $type
@@ -134,7 +143,7 @@ abstract class BootstrapBase {
 	 */
 	protected function add($type, $location, array $attributes = array())
 	{
-		return $this->html->$type(asset($location), $attributes);
+		return $this->html->$type($location, $attributes);
 	}
 
 	/**
@@ -229,7 +238,7 @@ abstract class BootstrapBase {
 			case 'time':
 					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
 					$return .= $this->form->text($name, $value, $options);
-					$return .= '<span class="input-group-addon"><span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span></span></div>';
+					$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
 					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({';
 
 					switch ($type) {
@@ -243,7 +252,7 @@ abstract class BootstrapBase {
 						default:
 					}
 					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '"'; }, $parameters, array_keys($parameters)));
-					$return .= '}); });</script>';
+					$return .= '}); });</script>' . "\n";
 				break;
 			case 'password':
 			case 'file':
@@ -432,7 +441,7 @@ abstract class BootstrapBase {
 		if($emphasis && is_string($emphasis)){
 			$content = '<strong>' . $emphasis . '</strong> ' . $content; 
 		}
-		
+
 		if ($dismissible) {
 			$class = 'alert-dismissable';
 		}
