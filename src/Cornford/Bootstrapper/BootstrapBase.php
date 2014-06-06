@@ -80,14 +80,27 @@ abstract class BootstrapBase {
 	}
 
 	/**
+	 * Set the form type
+	 *
+	 * @param string $type
+	 * @param string $inputClass
+	 * @param string $labelClass
+	 *
+	 * @return self
+	 */
+	protected function form($type = self::FORM_VERTICAL, $inputClass = '', $labelClass = '') {
+		$this->formType = $type;
+		$this->inputClass = $inputClass;
+		$this->labelClass = $labelClass;
+	}
+
+	/**
 	 * Set the form type to vertical
 	 *
 	 * @return self
 	 */
 	public function vertical() {
-		$this->formType = self::FORM_VERTICAL;
-		$this->inputClass = '';
-		$this->labelClass = '';
+		$this->form();
 
 		return $this;
 	}
@@ -101,9 +114,7 @@ abstract class BootstrapBase {
 	 * @return self
 	 */
 	public function horizontal($inputClass = '', $labelClass = '') {
-		$this->formType = self::FORM_HORIZONTAL;
-		$this->inputClass = $inputClass;
-		$this->labelClass = $labelClass;
+		$this->form(self::FORM_HORIZONTAL, $inputClass, $labelClass);
 
 		return $this;
 	}
@@ -116,9 +127,7 @@ abstract class BootstrapBase {
 	 * @return self
 	 */
 	public function inline($labelClass = '') {
-		$this->formType = self::FORM_INLINE;
-		$this->inputClass = '';
-		$this->labelClass = $labelClass;
+		$this->form(self::FORM_INLINE, '', $labelClass);
 
 		return $this;
 	}
@@ -411,16 +420,18 @@ abstract class BootstrapBase {
 		switch ($type) {
 			case 'linkRoute':
 			case 'linkAction':
-			return $this->html->$type($location, $title, $parameters, $attributes);
+				$return = $this->html->$type($location, $title, $parameters, $attributes);
 				break;
 			case 'mailto':
-				return $this->html->$type($location, $title, $attributes);
+				$return = $this->html->$type($location, $title, $attributes);
 				break;
 			case 'link':
 			case 'secureLink':
 			default:
-				return $this->html->$type($location, $title, $attributes, $secure);
+				$return = $this->html->$type($location, $title, $attributes, $secure);
 		}
+
+		return $return;
 	}
 
 	/**
