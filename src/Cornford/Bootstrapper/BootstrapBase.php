@@ -86,7 +86,7 @@ abstract class BootstrapBase {
 	 * @param string $inputClass
 	 * @param string $labelClass
 	 *
-	 * @return self
+	 * @return void
 	 */
 	protected function form($type = self::FORM_VERTICAL, $inputClass = '', $labelClass = '') {
 		$this->formType = $type;
