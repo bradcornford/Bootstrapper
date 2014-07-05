@@ -52,7 +52,7 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 				break;
 			case 'local':
 			default:
-				$return = $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
+				$return = $this->add('script', asset(self::JS_JQUERY_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_BOOTSTRAP_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_MOMENT_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_DATETIME_LOCAL), $attributes);
