@@ -28,7 +28,7 @@ abstract class BootstrapBase {
 	const JS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.js';
 
 	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css';
-	const CSS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.css';
+	const CSS_DATETIME_LOCAL = 'assets/css/bootstrap-datetimepicker.min.css';
 
 	/**
 	 * Form
