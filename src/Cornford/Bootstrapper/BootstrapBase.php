@@ -248,7 +248,7 @@ abstract class BootstrapBase {
 					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
 					$return .= $this->form->text($name, $value, $options);
 					$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
-					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({';
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({ ';
 
 					switch ($type) {
 						case 'time':
@@ -260,8 +260,10 @@ abstract class BootstrapBase {
 						case 'datetime':
 						default:
 					}
+
 					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '"'; }, $parameters, array_keys($parameters)));
-					$return .= '}); });</script>' . "\n";
+					$return = rtrim($return, ', ');
+					$return .= ' }); });</script>' . "\n";
 				break;
 			case 'password':
 			case 'file':

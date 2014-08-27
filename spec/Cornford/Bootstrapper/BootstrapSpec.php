@@ -100,21 +100,21 @@ class BootstrapSpec extends ObjectBehavior
 	{
 		$this->date('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_date").datetimepicker({pickTime: false, }); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name_date").datetimepicker({ pickTime: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_datetime_input()
 	{
 		$this->datetime('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_datetime").datetimepicker({}); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name_datetime").datetimepicker({ }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_time_input()
 	{
 		$this->time('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-time"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_time").datetimepicker({pickDate: false, }); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name_time").datetimepicker({ pickDate: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_textarea_field()

@@ -65,6 +65,8 @@ That's it! You're all set to go.
 
 ## Usage
 
+In order to include the Bootstrap dependencies you will need to utilise the Bootstrap::css() and Bootstrap:js() methods in the head section of your layout / page template.
+
 It's really as simple as using the Bootstrap class in any Controller / Model / File you see fit with:
 
 `Bootstrap::`
