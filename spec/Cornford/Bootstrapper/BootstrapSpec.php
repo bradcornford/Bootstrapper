@@ -78,78 +78,154 @@ class BootstrapSpec extends ObjectBehavior
 
 	function it_can_create_a_text_input()
 	{
-		$this->text('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n");
+		$this->text('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_text_input_with_out_container()
+	{
+		$this->text('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n");
 	}
 
 	function it_can_create_a_password_input()
 	{
-		$this->password('name', 'Label')->shouldReturn('<div class="form-group">' . "\n\n" . '<input type="password" name="name">' . "\n" . '</div>' . "\n");
+		$this->password('name', 'Label')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="password" name="name">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_password_input_with_out_container()
+	{
+		$this->password('name', 'Label', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="password" name="name">' . "\n");
 	}
 
 	function it_can_create_an_email_input()
 	{
-		$this->email('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<input type="email" name="name" value="value">' . "\n" . '</div>' . "\n");
+		$this->email('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="email" name="name" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_an_email_input_with_out_container()
+	{
+		$this->email('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="email" name="name" value="value">' . "\n");
 	}
 
 	function it_can_create_a_file_input()
 	{
-		$this->file('name', 'Label')->shouldReturn('<div class="form-group">' . "\n\n" . '<input type="file" name="name">' . "\n" . '</div>' . "\n");
+		$this->file('name', 'Label')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="file" name="name">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_file_input_with_out_container()
+	{
+		$this->file('name', 'Label', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="file" name="name">' . "\n");
 	}
 
 	function it_can_create_a_date_input()
 	{
-		$this->date('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
+		$this->date('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
 			'$(function() { $("#name_date").datetimepicker({ pickTime: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
+	function it_can_create_a_date_input_with_out_container()
+	{
+		$this->date('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
+			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
+			'$(function() { $("#name_date").datetimepicker({ pickTime: false }); });</script>' . "\n");
+	}
+
 	function it_can_create_a_datetime_input()
 	{
-		$this->datetime('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
+		$this->datetime('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
 			'$(function() { $("#name_datetime").datetimepicker({ }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
+	function it_can_create_a_datetime_input_with_out_container()
+	{
+		$this->datetime('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
+			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
+			'$(function() { $("#name_datetime").datetimepicker({ }); });</script>' . "\n");
+	}
+
 	function it_can_create_a_time_input()
 	{
-		$this->time('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
+		$this->time('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-time"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
 			'$(function() { $("#name_time").datetimepicker({ pickDate: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
+	function it_can_create_a_time_input_with_out_container()
+	{
+		$this->time('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
+			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-time"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
+			'$(function() { $("#name_time").datetimepicker({ pickDate: false }); });</script>' . "\n");
+	}
+
 	function it_can_create_a_textarea_field()
 	{
-		$this->textarea('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n\n" . '<textarea name="name">value</textarea>' . "\n" . '</div>' . "\n");
+		$this->textarea('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<textarea name="name">value</textarea>' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_textarea_field_with_out_container()
+	{
+		$this->textarea('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<textarea name="name">value</textarea>' . "\n");
 	}
 
 	function it_can_create_a_select_field()
 	{
-		$this->select('name', 'Label', array(0 => 1))->shouldReturn('<div class="form-group">' . "\n\n" . '<select name="name"><option value="0">1</option></select>' . "\n" . '</div>' . "\n");
+		$this->select('name', 'Label', array(0 => 1))->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<select name="name"><option value="0">1</option></select>' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_select_field_with_out_container()
+	{
+		$this->select('name', 'Label', array(0 => 1), 1, null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<select name="name"><option value="0">1</option></select>' . "\n");
 	}
 
 	function it_can_create_a_checkbox_field()
 	{
-		$this->checkbox('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n" . '<div class="checkbox">' . "\n\n" . '<input type="checkbox" name="name" value="value">' . "\n" . '</div>' . "\n" . '</div>');
+		$this->checkbox('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<div class="checkbox">' . "\n" . '<label><input type="checkbox" name="name" value="value">Label</label>' . "\n" . '</div>' . "\n" . '</div>');
+	}
+
+	function it_can_create_a_checkbox_field_with_out_container()
+	{
+		$this->checkbox('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<div class="checkbox">' . "\n" . '<label><input type="checkbox" name="name" value="value">Label</label>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_radio_field()
 	{
-		$this->radio('name', 'Label', 'value')->shouldReturn('<div class="form-group">' . "\n" . '<div class="radio">' . "\n\n" . '<input type="radio" name="name" value="value">' . "\n" . '</div>' . "\n" . '</div>');
+		$this->radio('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<div class="radio">' . "\n" . '<label><input type="radio" name="name" value="value">Label</label>' . "\n" . '</div>' . "\n" . '</div>');
+	}
+
+	function it_can_create_a_radio_field_with_out_container()
+	{
+		$this->radio('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<div class="radio">' . "\n" . '<label><input type="radio" name="name" value="value">Label</label>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_submit_button()
 	{
-		$this->submit('value')->shouldReturn('<div class="form-group">' . "\n" . '<input type="sbumit" name="submit" value="value">' . "\n" . '</div>' . "\n");
+		$this->submit('value')->shouldReturn('<div>' . "\n" . '<input type="sbumit" name="submit" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_submit_button_with_out_container()
+	{
+		$this->submit('value', array('container' => array('display' => 'none')))->shouldReturn('<input type="sbumit" name="submit" value="value">' . "\n");
 	}
 
 	function it_can_create_a_button()
 	{
-		$this->button('value')->shouldReturn('<div class="form-group">' . "\n" . '<input type="button" name="button" value="value">' . "\n" . '</div>' . "\n");
+		$this->button('value')->shouldReturn('<div>' . "\n" . '<input type="button" name="button" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_button_with_out_container()
+	{
+		$this->button('value', array('container' => array('display' => 'none')))->shouldReturn('<input type="button" name="button" value="value">' . "\n");
 	}
 
 	function it_can_create_a_reset_button()
 	{
-		$this->reset('value')->shouldReturn('<div class="form-group">' . "\n" . '<input type="reset" name="reset" value="value">' . "\n" . '</div>' . "\n");
+		$this->reset('value')->shouldReturn('<div>' . "\n" . '<input type="reset" name="reset" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_reset_button_with_out_container()
+	{
+		$this->reset('value', array('container' => array('display' => 'none')))->shouldReturn('<input type="reset" name="reset" value="value">' . "\n");
 	}
 
 	function it_can_create_a_hyperlink()
