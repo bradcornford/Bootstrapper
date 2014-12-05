@@ -166,13 +166,14 @@ abstract class BootstrapBase {
 	 * @return string
 	 */
 	protected function label($name, $label = null, array $options = array(), $content = null) {
+		$return = '';
 		$options = array_merge(array('class' => 'control-label ' . $this->labelClass, 'for' => (!$content ? $name : null)), $options);
 
 		if ($label) {
-			return '<label' . $this->html->attributes($options) . '>' . $content . ucwords(str_replace('_', ' ', $label)) . '</label>' . "\n";
+			$return .= '<label' . $this->html->attributes($options) . '>' . $content . ucwords(str_replace('_', ' ', $label)) . '</label>' . "\n";
 		}
 
-		return '';
+		return $return;
 	}
 
 	/**
@@ -185,11 +186,13 @@ abstract class BootstrapBase {
 	 * @return string
 	 */
 	protected function errors($name, $errors = null, $wrap = '<span class="help-block">:message</span>') {
+		$return = '';
+
 		if ($errors && $errors->has($name)) {
-			return $errors->first($name, $wrap) . "\n";
+			$return .= $errors->first($name, $wrap) . "\n";
 		}
 
-		return '';
+		return $return;
 	}
 
 	/**
@@ -205,7 +208,6 @@ abstract class BootstrapBase {
 	protected function group($name, $errors = null, $class = 'form-group', array $options = array())
 	{
 		$options = array_merge(array('class' => $class . ($errors && $errors->has($name) ? ' has-error' : '')), $options);
-
 		$return = '<div' . $this->html->attributes($options) . '>' . "\n";
 
 		return $return;
@@ -226,9 +228,8 @@ abstract class BootstrapBase {
 	 */
 	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
 	{
-		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label, 'id' => $name), $options);
 		$return = '';
-
+		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label, 'id' => $name), $options);
 		$containerAttributes = $this->getContainerAttributes($options);
 		$labelAttributes = $this->getLabelAttributes($options);
 
@@ -236,7 +237,9 @@ abstract class BootstrapBase {
 			$return .= $this->group($name, $errors, 'form-group', $containerAttributes);
 		}
 
-		$return .= $this->label($name, $label, $labelAttributes);
+		if ($type != 'search') {
+			$return .= $this->label($name, $label, $labelAttributes);
+		}
 
 		if (!$value) {
 			$value = $this->input->get($name);
@@ -273,6 +276,25 @@ abstract class BootstrapBase {
 			case 'password':
 			case 'file':
 				$return .= $this->form->$type($name, $options) . "\n";
+				break;
+			case 'search':
+				$return .= '<div class="input-group">' . "\n";
+				$return .= $this->form->input('search', $name, $value, $options) . "\n";
+				$return .= '<div class="input-group-btn">' . "\n";
+				$return .= '<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>' . "\n";
+				$return .= '</div>' . "\n";
+				$return .= '</div>' . "\n";
+				break;
+			case 'telephone':
+				$return .= $this->form->input('tel', $name, $value, $options) . "\n";
+				break;
+			case 'range':
+				$return .= '<div class="input-group">' . "\n";
+				$return .= '<div class="form-control">' . "\n";
+				$return .= $this->form->input('range', $name, $value, array_merge($options, array('class' => '', 'onchange' => $name . 'value.value=value', 'oninput' => $name . 'value.value=value'))) . "\n";
+				$return .= '</div>' . "\n";
+				$return .= '<output id="' . $name . 'value" class="input-group-addon">0</output>' . "\n";
+				$return .= '</div>' . "\n";
 				break;
 			case 'text':
 			case 'hidden':
@@ -311,10 +333,8 @@ abstract class BootstrapBase {
 	 */
 	protected function options($name, $label = null, array $list = array(), $selected = null, $errors = null, array $options = array())
 	{
-		$options = array_merge(array('class' => 'form-control', 'id' => $name), $options);
-
 		$return = '';
-
+		$options = array_merge(array('class' => 'form-control', 'id' => $name), $options);
 		$containerAttributes = $this->getContainerAttributes($options);
 		$labelAttributes = $this->getLabelAttributes($options);
 
@@ -357,9 +377,7 @@ abstract class BootstrapBase {
 	protected function field($type, $name, $label = null, $value = null, $checked = null, array $options = array())
 	{
 		$return = '';
-
 		$options = array_merge(array('id' => $name), $options);
-
 		$containerAttributes = $this->getContainerAttributes($options);
 		$labelAttributes = $this->getLabelAttributes($options);
 
@@ -398,6 +416,7 @@ abstract class BootstrapBase {
 	protected function action($type, $value, array $attributes = array())
 	{
 		$return = '';
+		$containerAttributes = $this->getContainerAttributes($attributes);
 
 		switch ($type) {
 			case 'submit':
@@ -408,8 +427,6 @@ abstract class BootstrapBase {
 			default:
 				$attributes = array_merge(array('class' => 'btn btn-default'), $attributes);
 		}
-
-		$containerAttributes = $this->getContainerAttributes($attributes);
 
 		if (!isset($containerAttributes['display'])) {
 			$return .= $this->group('', null, 'form-group', $containerAttributes);

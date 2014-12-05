@@ -109,6 +109,86 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	}
 
 	/**
+	 * Create a form telephone field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function telephone($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('telephone', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form number field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function number($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('number', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form url field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function url($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('url', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form range field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function range($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('range', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form search field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function search($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('search', $name, $label, $value, $errors, $options);
+	}
+
+	/**
 	 * Create a form file field.
 	 *
 	 * @param string                         $name
