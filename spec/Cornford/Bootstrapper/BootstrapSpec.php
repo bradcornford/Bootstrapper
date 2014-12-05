@@ -10,6 +10,7 @@ class BootstrapSpec extends ObjectBehavior
 	{
 		$form = Mockery::mock('Illuminate\Html\FormBuilder');
 		$form->shouldReceive('label')->andReturn('');
+		$form->shouldReceive('input')->andReturn('<input type="text" name="name" value="value">');
 		$form->shouldReceive('text')->andReturn('<input type="text" name="name" value="value">');
 		$form->shouldReceive('password')->andReturn('<input type="password" name="name">');
 		$form->shouldReceive('email')->andReturn('<input type="email" name="name" value="value">');
@@ -104,6 +105,56 @@ class BootstrapSpec extends ObjectBehavior
 	function it_can_create_an_email_input_with_out_container()
 	{
 		$this->email('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="email" name="name" value="value">' . "\n");
+	}
+
+	function it_can_create_a_telephone_input()
+	{
+		$this->telephone('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_telephone_input_with_out_container()
+	{
+		$this->telephone('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n");
+	}
+
+	function it_can_create_a_number_input()
+	{
+		$this->number('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_number_input_with_out_container()
+	{
+		$this->number('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n");
+	}
+
+	function it_can_create_a_url_input()
+	{
+		$this->url('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_url_input_with_out_container()
+	{
+		$this->url('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<input type="text" name="name" value="value">' . "\n");
+	}
+
+	function it_can_create_a_range_input()
+	{
+		$this->range('name', 'Label', 'value', null, array('min' => '1', 'max' => '10'))->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div class="input-group">' . "\n" . '<div class="form-control">' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n" . '<output id="namevalue" class="input-group-addon">0</output>' . "\n" . '</div>' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_range_input_with_out_container()
+	{
+		$this->range('name', 'Label', 'value', null, array('min' => '1', 'max' => '10', 'container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div class="input-group">' . "\n" . '<div class="form-control">' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '</div>' . "\n" . '<output id="namevalue" class="input-group-addon">0</output>' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_search_input()
+	{
+		$this->search('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<div class="input-group">' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '<div class="input-group-btn">' . "\n" . '<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>' . "\n" . '</div>' . "\n" . '</div>' . "\n" . '</div>' . "\n");
+	}
+
+	function it_can_create_a_search_input_with_out_container()
+	{
+		$this->search('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<div class="input-group">' . "\n" . '<input type="text" name="name" value="value">' . "\n" . '<div class="input-group-btn">' . "\n" . '<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>' . "\n" . '</div>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_file_input()
