@@ -207,7 +207,8 @@ abstract class BootstrapBase {
 	 */
 	protected function group($name, $errors = null, $class = 'form-group', array $options = array())
 	{
-		$options = array_merge(array('class' => $class . ($errors && $errors->has($name) ? ' has-error' : '')), $options);
+		$options = array_merge(array('class' => $class), $options);
+		$options['class'] .= ($errors && $errors->has($name) ? ' has-error' : '');
 		$return = '<div' . $this->html->attributes($options) . '>' . "\n";
 
 		return $return;
