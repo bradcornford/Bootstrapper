@@ -275,6 +275,7 @@ abstract class BootstrapBase {
 				break;
 			case 'password':
 			case 'file':
+				unset($options['placeholder']);
 				$return .= $this->form->$type($name, $options) . "\n";
 				break;
 			case 'search':
