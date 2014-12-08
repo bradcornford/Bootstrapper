@@ -15,6 +15,11 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 - `Bootstrap::text`
 - `Bootstrap::password`
 - `Bootstrap::email`
+- `Bootstrap::telephone`
+- `Bootstrap::number`
+- `Bootstrap::url`
+- `Bootstrap::range`
+- `Bootstrap::search`
 - `Bootstrap::file`
 - `Bootstrap::date`
 - `Bootstrap::datetime`
@@ -80,7 +85,11 @@ This will give you access to
 - [Inline](#inline)
 - [Text](#text)
 - [Password](#password)
-- [Email](#email)
+- [Telephone](#telephone)
+- [Number](#number)
+- [Url](#url)
+- [Range](#range)
+- [Search](#search)
 - [File](#file)
 - [Date](#date)
 - [Datetime](#datetime)
@@ -158,6 +167,36 @@ The `password` method generates a password field with an optional label, from er
 The `email` method generates an email field with an optional label, from errors and options.
 
 	Bootstrap::email('email', 'Email address', 'Value');
+
+### Telephone
+
+The `telephone` method generates an tel field with an optional label, from errors and options.
+
+	Bootstrap::telephone('telephone', 'Telephone Number', 'Value', $errors, array('pattern' => '^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$'));
+
+### Number
+
+The `number` method generates an number field with an optional label, from errors and options.
+
+	Bootstrap::number('number', 'Number', 'Value', $errors, array('min' => 1, 'max' => 10, 'step' => 2));
+
+### Url
+
+The `url` method generates an url field with an optional label, from errors and options.
+
+	Bootstrap::url('url', 'URL', 'Value', $errors, array('pattern' => '^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'));
+
+### Range
+
+The `range` method generates an number field with an optional label, from errors and options.
+
+	Bootstrap::range('range', 'Range', 'Value', $errors, array('min' => 1, 'max' => 10, 'step' => 2));
+
+### Search
+
+The `search` method generates an search field and icon with an optional label, from errors and options.
+
+	Bootstrap::number('search', 'Search', 'Value');
 
 ### File
 
