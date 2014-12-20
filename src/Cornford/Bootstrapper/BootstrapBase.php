@@ -254,10 +254,16 @@ abstract class BootstrapBase {
 			case 'datetime':
 			case 'date':
 			case 'time':
-					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
-					$return .= $this->form->text($name, $value, $options);
-					$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
-					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({ ';
+					if (isset($parameters['displayIcon']) && !$parameters['displayIcon']) {
+						unset($parameters['displayIcon']);
+						$return .= $this->form->text($name, $value, $options);
+					} else {
+						$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
+						$return .= $this->form->text($name, $value, $options);
+						$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
+					}
+
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . ', #' . $name . '_' . $type . '").datetimepicker({ ';
 
 					switch ($type) {
 						case 'time':
