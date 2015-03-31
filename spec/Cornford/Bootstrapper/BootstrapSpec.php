@@ -171,42 +171,42 @@ class BootstrapSpec extends ObjectBehavior
 	{
 		$this->date('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_date").datetimepicker({ pickTime: false }); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name, #name_date").datetimepicker({ pickTime: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_date_input_with_out_container()
 	{
 		$this->date('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_date" class="input-group date"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_date").datetimepicker({ pickTime: false }); });</script>' . "\n");
+			'$(function() { $("#name, #name_date").datetimepicker({ pickTime: false }); });</script>' . "\n");
 	}
 
 	function it_can_create_a_datetime_input()
 	{
 		$this->datetime('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_datetime").datetimepicker({ }); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name, #name_datetime").datetimepicker({ }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_datetime_input_with_out_container()
 	{
 		$this->datetime('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_datetime" class="input-group datetime"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-calendar"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_datetime").datetimepicker({ }); });</script>' . "\n");
+			'$(function() { $("#name, #name_datetime").datetimepicker({ }); });</script>' . "\n");
 	}
 
 	function it_can_create_a_time_input()
 	{
 		$this->time('name', 'Label', 'value')->shouldReturn('<div>' . "\n" . '<label>Label</label>' . "\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-time"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_time").datetimepicker({ pickDate: false }); });</script>' . "\n" . '</div>' . "\n");
+			'$(function() { $("#name, #name_time").datetimepicker({ pickDate: false }); });</script>' . "\n" . '</div>' . "\n");
 	}
 
 	function it_can_create_a_time_input_with_out_container()
 	{
 		$this->time('name', 'Label', 'value', null, array('container' => array('display' => 'none')))->shouldReturn('<label>Label</label>' . "\n" . '<div id="name_time" class="input-group time"><input type="text" name="name" value="value">' .
 			'<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-time"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n" . '<script type="text/javascript">' .
-			'$(function() { $("#name_time").datetimepicker({ pickDate: false }); });</script>' . "\n");
+			'$(function() { $("#name, #name_time").datetimepicker({ pickDate: false }); });</script>' . "\n");
 	}
 
 	function it_can_create_a_textarea_field()

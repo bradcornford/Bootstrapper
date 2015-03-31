@@ -12,10 +12,10 @@ abstract class BootstrapBase {
 	const FORM_HORIZONTAL = 'horizontal';
 	const FORM_INLINE = 'inline';
 
-	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css';
 	const CSS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap.min.css';
 
-	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js';
 	const JS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap.min.js';
 
 	const JS_JQUERY_CDN = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';
@@ -169,7 +169,7 @@ abstract class BootstrapBase {
 		$return = '';
 		$options = array_merge(array('class' => 'control-label ' . $this->labelClass, 'for' => (!$content ? $name : null)), $options);
 
-		if ($label) {
+		if ($label !== null) {
 			$return .= '<label' . $this->html->attributes($options) . '>' . $content . ucwords(str_replace('_', ' ', $label)) . '</label>' . "\n";
 		}
 
@@ -242,7 +242,7 @@ abstract class BootstrapBase {
 			$return .= $this->label($name, $label, $labelAttributes);
 		}
 
-		if (!$value) {
+		if ($value === null) {
 			$value = $this->input->get($name);
 		}
 
@@ -254,10 +254,16 @@ abstract class BootstrapBase {
 			case 'datetime':
 			case 'date':
 			case 'time':
-					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
-					$return .= $this->form->text($name, $value, $options);
-					$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
-					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({ ';
+					if (isset($parameters['displayIcon']) && !$parameters['displayIcon']) {
+						unset($parameters['displayIcon']);
+						$return .= $this->form->text($name, $value, $options);
+					} else {
+						$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
+						$return .= $this->form->text($name, $value, $options);
+						$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
+					}
+
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . ', #' . $name . '_' . $type . '").datetimepicker({ ';
 
 					switch ($type) {
 						case 'time':
@@ -500,11 +506,11 @@ abstract class BootstrapBase {
 		$attributes = array_merge(array('class' => 'alert' . ($dismissible ? ' alert-dismissable' : '') . ' alert-' . ($type != 'message' ? $type : 'default')), $attributes);
 		$return = '<div ' . $this->html->attributes($attributes) . '>';
 
-		if ($dismissible) {
+		if ($dismissible !== null) {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
-		$return .= ($emphasis && is_string($emphasis) ? '<strong>' . $emphasis . '</strong> ' : '') . $content . '</div>';
+		$return .= ($emphasis !== null && is_string($emphasis) ? '<strong>' . $emphasis . '</strong> ' : '') . $content . '</div>';
 
 		return $return;
 	}
