@@ -169,7 +169,7 @@ abstract class BootstrapBase {
 		$return = '';
 		$options = array_merge(array('class' => 'control-label ' . $this->labelClass, 'for' => (!$content ? $name : null)), $options);
 
-		if ($label) {
+		if ($label !== null) {
 			$return .= '<label' . $this->html->attributes($options) . '>' . $content . ucwords(str_replace('_', ' ', $label)) . '</label>' . "\n";
 		}
 
@@ -242,7 +242,7 @@ abstract class BootstrapBase {
 			$return .= $this->label($name, $label, $labelAttributes);
 		}
 
-		if (!$value) {
+		if ($value === null) {
 			$value = $this->input->get($name);
 		}
 
@@ -506,7 +506,7 @@ abstract class BootstrapBase {
 		$attributes = array_merge(array('class' => 'alert' . ($dismissible ? ' alert-dismissable' : '') . ' alert-' . ($type != 'message' ? $type : 'default')), $attributes);
 		$return = '<div ' . $this->html->attributes($attributes) . '>';
 
-		if ($dismissible) {
+		if ($dismissible !== null) {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
