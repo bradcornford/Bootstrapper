@@ -12,10 +12,10 @@ abstract class BootstrapBase {
 	const FORM_HORIZONTAL = 'horizontal';
 	const FORM_INLINE = 'inline';
 
-	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css';
 	const CSS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap.min.css';
 
-	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js';
 	const JS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap.min.js';
 
 	const JS_JQUERY_CDN = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';
