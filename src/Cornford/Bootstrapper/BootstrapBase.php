@@ -510,7 +510,7 @@ abstract class BootstrapBase {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
-		$return .= ($emphasis && is_string($emphasis) ? '<strong>' . $emphasis . '</strong> ' : '') . $content . '</div>';
+		$return .= ($emphasis !== null && is_string($emphasis) ? '<strong>' . $emphasis . '</strong> ' : '') . $content . '</div>';
 
 		return $return;
 	}
