@@ -49,6 +49,7 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/bootstrapper`.
 
 	"require": {
+		"illuminate/html": "5.*",
 		"cornford/bootstrapper": "2.*"
 	}
 
