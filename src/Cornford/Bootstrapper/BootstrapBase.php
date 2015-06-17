@@ -506,7 +506,7 @@ abstract class BootstrapBase {
 		$attributes = array_merge(array('class' => 'alert' . ($dismissible ? ' alert-dismissable' : '') . ' alert-' . ($type != 'message' ? $type : 'default')), $attributes);
 		$return = '<div ' . $this->html->attributes($attributes) . '>';
 
-		if ($dismissible !== null) {
+		if ($dismissible !== false) {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
