@@ -18,7 +18,8 @@ class BootstrapServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('cornford/bootstrapper');
+		$assetPath = __DIR__.'/../../../public';
+		$this->publishes([$assetPath => public_path('packages/cornford/bootstrapper')], 'bootstrapper');
 	}
 
 	/**
@@ -28,10 +29,10 @@ class BootstrapServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['bootstrap'] = $this->app->share(function()
+		$this->app['bootstrap'] = $this->app->share(function($app)
 		{
 			return new Bootstrap(
-				$this->app->make('Illuminate\Html\FormBuilder'),
+				$this->app->make('Illuminate\Html\FormBuilder', ['csrfToken' => $app['session.store']->getToken()]),
 				$this->app->make('Illuminate\Html\HtmlBuilder'),
 				$this->app->make('Illuminate\Http\Request')
 			);

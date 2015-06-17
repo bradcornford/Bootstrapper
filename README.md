@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/bradcornford/Bootstrapper.svg?branch=master)](https://travis-ci.org/bradcornford/Bootstrapper)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/?branch=master)
 
+### For Laravel 4.x, check [version 1.5.1](https://github.com/bradcornford/Bootstrapper/tree/v1.5.1)
+
 Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providing a variety of helpers to speed up development. These include:
 
 - `Bootstrap::css`
@@ -47,24 +49,27 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/bootstrapper`.
 
 	"require": {
-		"cornford/bootstrapper": "1.*"
+		"cornford/bootstrapper": "2.*"
 	}
 
 Next, update Composer from the Terminal:
 
 	composer update
 
-Once this operation completes, the next step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
+Once this operation completes, the next step is to add the required service providers. Open `app/config/app.php`, and add the new items to the providers array.
 
+	'Illuminate\Html\HtmlServiceProvider',
 	'Cornford\Bootstrapper\BootstrapServiceProvider',
 
-The final step is to introduce the facade. Open `app/config/app.php`, and add a new item to the aliases array.
+The final step is to introduce the required facades. Open `app/config/app.php`, and add the new items to the aliases array.
 
+	'Form'            => 'Illuminate\Html\FormFacade',
+	'HTML'            => 'Illuminate\Html\HtmlFacade',
 	'Bootstrap'       => 'Cornford\Bootstrapper\Facades\Bootstrap',
 
 If you want to introduce the packages JavaScripts and Stylesheets, run the following command to pull them into your project.
 
-	php artisan asset:publish cornford/bootstrapper
+	php artisan vendor:publish --provider="Cornford\\Bootstrapper\\BootstrapServiceProvider"
 
 That's it! You're all set to go.
 
