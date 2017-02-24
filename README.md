@@ -5,15 +5,27 @@
 [![Build Status](https://travis-ci.org/bradcornford/Bootstrapper.svg?branch=master)](https://travis-ci.org/bradcornford/Bootstrapper)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bradcornford/Bootstrapper/?branch=master)
 
+### For Laravel 4.x, check [version 1.5.1](https://github.com/bradcornford/Bootstrapper/tree/v1.5.1)
+
 Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providing a variety of helpers to speed up development. These include:
 
 - `Bootstrap::css`
 - `Bootstrap::js`
-- `Bootstrap::token`
+- `Bootstrap::vertical`
+- `Bootstrap::horizontal`
+- `Bootstrap::inline`
 - `Bootstrap::text`
 - `Bootstrap::password`
 - `Bootstrap::email`
+- `Bootstrap::telephone`
+- `Bootstrap::number`
+- `Bootstrap::url`
+- `Bootstrap::range`
+- `Bootstrap::search`
 - `Bootstrap::file`
+- `Bootstrap::date`
+- `Bootstrap::datetime`
+- `Bootstrap::time`
 - `Bootstrap::textarea`
 - `Bootstrap::select`
 - `Bootstrap::checkbox`
@@ -37,24 +49,34 @@ Think of Bootstrap as an easy way to integrate Bootstrap with Laravel 4, providi
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/bootstrapper`.
 
 	"require": {
-		"cornford/bootstrapper": "1.*"
+		"illuminate/html": "5.*",
+		"cornford/bootstrapper": "2.*"
 	}
 
 Next, update Composer from the Terminal:
 
 	composer update
 
-Once this operation completes, the next step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
+Once this operation completes, the next step is to add the required service providers. Open `app/config/app.php`, and add the new items to the providers array.
 
+	'Illuminate\Html\HtmlServiceProvider',
 	'Cornford\Bootstrapper\BootstrapServiceProvider',
 
-The final step is to introduce the facade. Open `app/config/app.php`, and add a new item to the aliases array.
+The final step is to introduce the required facades. Open `app/config/app.php`, and add the new items to the aliases array.
 
+	'Form'            => 'Illuminate\Html\FormFacade',
+	'HTML'            => 'Illuminate\Html\HtmlFacade',
 	'Bootstrap'       => 'Cornford\Bootstrapper\Facades\Bootstrap',
+
+If you want to introduce the packages JavaScripts and Stylesheets, run the following command to pull them into your project.
+
+	php artisan vendor:publish --provider="Cornford\\Bootstrapper\\BootstrapServiceProvider"
 
 That's it! You're all set to go.
 
 ## Usage
+
+In order to include the Bootstrap dependencies you will need to utilise the Bootstrap::css() and Bootstrap:js() methods in the head section of your layout / page template.
 
 It's really as simple as using the Bootstrap class in any Controller / Model / File you see fit with:
 
@@ -64,10 +86,20 @@ This will give you access to
 
 - [CSS](#css)
 - [JS](#js)
+- [Vertical](#vertical)
+- [Horizontal](#horizontal)
+- [Inline](#inline)
 - [Text](#text)
 - [Password](#password)
-- [Email](#email)
+- [Telephone](#telephone)
+- [Number](#number)
+- [Url](#url)
+- [Range](#range)
+- [Search](#search)
 - [File](#file)
+- [Date](#date)
+- [Datetime](#datetime)
+- [Time](#time)
 - [Textarea](#textarea)
 - [Select](#select)
 - [Checkbox](#checkbox)
@@ -100,6 +132,30 @@ The `js` method includes Bootstrap JS via either a CDN / Local file, and pass op
 	Bootstrap::js();
 	Bootstrap::js('local', ['type' => 'text/javascript']);
 
+### Vertical
+
+The `vertical` method allows a form to be set in a vertical manner. This is the default form type.
+The vertical method can be chained before any form element is added and will continue for subsequent form elements until overwritten.
+
+	Bootstrap::vertical();
+	Bootstrap::vertical()->text('text', 'Text', 'Value');
+
+### Horizontal
+
+The `horizontal` method allows a form to be set in a horizontal manner. This form type accepts both an input class and a label class.
+The horizontal method can be chained before any form element is added and will continue for subsequent form elements until overwritten.
+
+	Bootstrap::horizontal('col-sm-10', 'col-sm-2');
+	Bootstrap::horizontal('col-sm-10', 'col-sm-2')->text('text', 'Text', 'Value');
+
+### Inline
+
+The `inline` method allows a form to be set in an inline manner. This form type accepts only a label class.
+The inline method can be chained before any form element is added and will continue for subsequent form elements until overwritten.
+
+	Bootstrap::inline('sr-only');
+	Bootstrap::inline('sr-only')->text('text', 'Text', 'Value');
+
 ### Text
 
 The `text` method generates a text field with an optional label, from errors and options.
@@ -118,11 +174,62 @@ The `email` method generates an email field with an optional label, from errors 
 
 	Bootstrap::email('email', 'Email address', 'Value');
 
+### Telephone
+
+The `telephone` method generates an tel field with an optional label, from errors and options.
+
+	Bootstrap::telephone('telephone', 'Telephone Number', 'Value', $errors, array('pattern' => '^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$'));
+
+### Number
+
+The `number` method generates an number field with an optional label, from errors and options.
+
+	Bootstrap::number('number', 'Number', 'Value', $errors, array('min' => 1, 'max' => 10, 'step' => 2));
+
+### Url
+
+The `url` method generates an url field with an optional label, from errors and options.
+
+	Bootstrap::url('url', 'URL', 'Value', $errors, array('pattern' => '^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'));
+
+### Range
+
+The `range` method generates an number field with an optional label, from errors and options.
+
+	Bootstrap::range('range', 'Range', 'Value', $errors, array('min' => 1, 'max' => 10, 'step' => 2));
+
+### Search
+
+The `search` method generates an search field and icon with an optional label, from errors and options.
+
+	Bootstrap::number('search', 'Search', 'Value');
+
 ### File
 
 The `file` method generates a file field with an optional label, from errors and options.
 
 	Bootstrap::file('file', 'File');
+
+### Date
+
+The `date` method generates a date field with a date picker, with an optional label, from errors, input options, and javascript parameters.
+
+	Bootstrap::date('date', 'Date');
+	Bootstrap::date('date', 'Date', date('d-m-Y'), $errors, [], ['format' => 'DD-MM-YYYY']);
+
+### Datetime
+
+The `datetime` method generates a date field with a datetime picker, with an optional label, from errors, input options, and javascript parameters.
+
+	Bootstrap::datetime('datetime', 'Date');
+	Bootstrap::datetime('datetime', 'Date', date('d-m-Y H:i:s'));
+
+### Time
+
+The `time` method generates a date field with a time picker, with an optional label, from errors, input options, and javascript parameters.
+
+	Bootstrap::time('time', 'Time');
+	Bootstrap::time('time', 'Time', date('H:i:s'));
 
 ### Textarea
 

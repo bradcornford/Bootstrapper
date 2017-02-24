@@ -12,23 +12,23 @@ abstract class BootstrapBase {
 	const FORM_HORIZONTAL = 'horizontal';
 	const FORM_INLINE = 'inline';
 
-	const CSS_BOOTSTRAP_CDN = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
-	const CSS_BOOTSTRAP_LOCAL = 'assets/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap.min.css';
 
-	const JS_BOOTSTRAP_CDN = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js';
-	const JS_BOOTSTRAP_LOCAL = 'assets/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap.min.js';
 
-	const JS_JQUERY_CDN = '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js';
-	const JS_JQUERY_LOCAL = 'assets/js/jquery.min.js';
+	const JS_JQUERY_CDN = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';
+	const JS_JQUERY_LOCAL = 'packages/cornford/bootstrapper/assets/js/jquery.min.js';
 
-	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js';
-	const JS_MOMENT_LOCAL = 'assets/js/moment.min.js';
+	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js';
+	const JS_MOMENT_LOCAL = 'packages/cornford/bootstrapper/assets/js/moment.min.js';
 
-	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js';
-	const JS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.js';
+	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css';
+	const CSS_DATETIME_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap-datetimepicker.min.css';
 
-	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css';
-	const CSS_DATETIME_LOCAL = 'assets/js/bootstrap-datetimepicker.min.css';
+	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js';
+	const JS_DATETIME_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap-datetimepicker.min.js';
 
 	/**
 	 * Form
@@ -80,14 +80,27 @@ abstract class BootstrapBase {
 	}
 
 	/**
+	 * Set the form type
+	 *
+	 * @param string $type
+	 * @param string $inputClass
+	 * @param string $labelClass
+	 *
+	 * @return void
+	 */
+	protected function form($type = self::FORM_VERTICAL, $inputClass = '', $labelClass = '') {
+		$this->formType = $type;
+		$this->inputClass = $inputClass;
+		$this->labelClass = $labelClass;
+	}
+
+	/**
 	 * Set the form type to vertical
 	 *
 	 * @return self
 	 */
 	public function vertical() {
-		$this->formType = self::FORM_VERTICAL;
-		$this->inputClass = '';
-		$this->labelClass = '';
+		$this->form();
 
 		return $this;
 	}
@@ -101,9 +114,7 @@ abstract class BootstrapBase {
 	 * @return self
 	 */
 	public function horizontal($inputClass = '', $labelClass = '') {
-		$this->formType = self::FORM_HORIZONTAL;
-		$this->inputClass = $inputClass;
-		$this->labelClass = $labelClass;
+		$this->form(self::FORM_HORIZONTAL, $inputClass, $labelClass);
 
 		return $this;
 	}
@@ -116,11 +127,18 @@ abstract class BootstrapBase {
 	 * @return self
 	 */
 	public function inline($labelClass = '') {
-		$this->formType = self::FORM_INLINE;
-		$this->inputClass = '';
-		$this->labelClass = $labelClass;
+		$this->form(self::FORM_INLINE, '', $labelClass);
 
 		return $this;
+	}
+
+	/**
+	 * Get the form type
+	 *
+	 * @return string
+	 */
+	public function getFormType() {
+		return $this->formType;
 	}
 
 	/**
@@ -134,7 +152,7 @@ abstract class BootstrapBase {
 	 */
 	protected function add($type, $location, array $attributes = array())
 	{
-		return $this->html->$type(asset($location), $attributes);
+		return $this->html->$type($location, $attributes);
 	}
 
 	/**
@@ -143,17 +161,19 @@ abstract class BootstrapBase {
 	 * @param string $name
 	 * @param string $label
 	 * @param array  $options
+	 * @param string $content
 	 *
 	 * @return string
 	 */
-	protected function label($name, $label = null, array $options = array()) {
-		$options = array_merge(array('class' => 'control-label ' . $this->labelClass), $options);
+	protected function label($name, $label = null, array $options = array(), $content = null) {
+		$return = '';
+		$options = array_merge(array('class' => 'control-label ' . $this->labelClass, 'for' => (!$content ? $name : null)), $options);
 
-		if ($label) {
-			return $this->form->label($name, $label, $options) . "\n";
+		if ($label !== null) {
+			$return .= '<label' . $this->html->attributes($options) . '>' . $content . ucwords(str_replace('_', ' ', $label)) . '</label>' . "\n";
 		}
 
-		return '';
+		return $return;
 	}
 
 	/**
@@ -166,11 +186,13 @@ abstract class BootstrapBase {
 	 * @return string
 	 */
 	protected function errors($name, $errors = null, $wrap = '<span class="help-block">:message</span>') {
+		$return = '';
+
 		if ($errors && $errors->has($name)) {
-			return $errors->first($name, $wrap) . "\n";
+			$return .= $errors->first($name, $wrap) . "\n";
 		}
 
-		return '';
+		return $return;
 	}
 
 	/**
@@ -179,18 +201,15 @@ abstract class BootstrapBase {
 	 * @param string                         $name
 	 * @param \Illuminate\Support\MessageBag $errors
 	 * @param string                         $class
+	 * @param array                          $options
 	 *
 	 * @return string
 	 */
-	protected function group($name, $errors = null, $class = 'form-group')
+	protected function group($name, $errors = null, $class = 'form-group', array $options = array())
 	{
-		$return = '<div class="' . $class;
-
-		if ($errors && $errors->has($name)) {
-			$return .= ' has-error';
-		}
-
-		$return .= '">' . "\n";
+		$options = array_merge(array('class' => $class), $options);
+		$options['class'] .= ($errors && $errors->has($name) ? ' has-error' : '');
+		$return = '<div' . $this->html->attributes($options) . '>' . "\n";
 
 		return $return;
 	}
@@ -210,12 +229,20 @@ abstract class BootstrapBase {
 	 */
 	protected function input($type = 'text', $name, $label = null, $value = null, $errors = null, array $options = array(), array $parameters = array())
 	{
-		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label), $options);
+		$return = '';
+		$options = array_merge(array('class' => 'form-control', 'placeholder' => $label, 'id' => $name), $options);
+		$containerAttributes = $this->getContainerAttributes($options);
+		$labelAttributes = $this->getLabelAttributes($options);
 
-		$return = $this->group($name, $errors);
-		$return .= $this->label($name, $label);
+		if (!isset($containerAttributes['display'])) {
+			$return .= $this->group($name, $errors, 'form-group', $containerAttributes);
+		}
 
-		if (!$value) {
+		if ($type != 'search') {
+			$return .= $this->label($name, $label, $labelAttributes);
+		}
+
+		if ($value === null) {
 			$value = $this->input->get($name);
 		}
 
@@ -227,10 +254,16 @@ abstract class BootstrapBase {
 			case 'datetime':
 			case 'date':
 			case 'time':
-					$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
-					$return .= $this->form->text($name, $value, $options);
-					$return .= '<span class="input-group-addon"><span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span></span></div>';
-					$return .= '<script type="text/javascript">$(function() { $("#' . $name . '_' . $type . '").datetimepicker({';
+					if (isset($parameters['displayIcon']) && !$parameters['displayIcon']) {
+						unset($parameters['displayIcon']);
+						$return .= $this->form->text($name, $value, $options);
+					} else {
+						$return .= '<div id="' . $name . '_' . $type .  '" class="input-group ' . $type . '">';
+						$return .= $this->form->text($name, $value, $options);
+						$return .= '<span class="input-group-addon">' . "\n" . '<span class="glyphicon glyphicon-' . ($type == 'time' ? 'time' : 'calendar')  . '"></span>' . "\n" . '</span>' . "\n" . '</div>' . "\n";
+					}
+
+					$return .= '<script type="text/javascript">$(function() { $("#' . $name . ', #' . $name . '_' . $type . '").datetimepicker({ ';
 
 					switch ($type) {
 						case 'time':
@@ -242,12 +275,34 @@ abstract class BootstrapBase {
 						case 'datetime':
 						default:
 					}
+
 					$return .= implode(', ', array_map(function ($value, $key) { return $key . ': "' . $value . '"'; }, $parameters, array_keys($parameters)));
-					$return .= '}); });</script>';
+					$return = rtrim($return, ', ');
+					$return .= ' }); });</script>' . "\n";
 				break;
 			case 'password':
 			case 'file':
+				unset($options['placeholder']);
 				$return .= $this->form->$type($name, $options) . "\n";
+				break;
+			case 'search':
+				$return .= '<div class="input-group">' . "\n";
+				$return .= $this->form->input('search', $name, $value, $options) . "\n";
+				$return .= '<div class="input-group-btn">' . "\n";
+				$return .= '<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>' . "\n";
+				$return .= '</div>' . "\n";
+				$return .= '</div>' . "\n";
+				break;
+			case 'telephone':
+				$return .= $this->form->input('tel', $name, $value, $options) . "\n";
+				break;
+			case 'range':
+				$return .= '<div class="input-group">' . "\n";
+				$return .= '<div class="form-control">' . "\n";
+				$return .= $this->form->input('range', $name, $value, array_merge($options, array('class' => '', 'onchange' => $name . 'value.value=value', 'oninput' => $name . 'value.value=value'))) . "\n";
+				$return .= '</div>' . "\n";
+				$return .= '<output id="' . $name . 'value" class="input-group-addon">0</output>' . "\n";
+				$return .= '</div>' . "\n";
 				break;
 			case 'text':
 			case 'hidden':
@@ -265,7 +320,9 @@ abstract class BootstrapBase {
 			$return .= '</div>' . "\n";
 		}
 
-		$return .= '</div>' . "\n";
+		if (!isset($containerAttributes['display'])) {
+			$return .= '</div>' . "\n";
+		}
 
 		return $return;
 	}
@@ -284,10 +341,16 @@ abstract class BootstrapBase {
 	 */
 	protected function options($name, $label = null, array $list = array(), $selected = null, $errors = null, array $options = array())
 	{
-		$options = array_merge(array('class' => 'form-control'), $options);
+		$return = '';
+		$options = array_merge(array('class' => 'form-control', 'id' => $name), $options);
+		$containerAttributes = $this->getContainerAttributes($options);
+		$labelAttributes = $this->getLabelAttributes($options);
 
-		$return = $this->group($name, $errors);
-		$return .= $this->label($name, $label);
+		if (!isset($containerAttributes['display'])) {
+			$return .= $this->group($name, $errors, 'form-group', $containerAttributes);
+		}
+
+		$return .= $this->label($name, $label, $labelAttributes);
 
 		if ($this->formType == self::FORM_HORIZONTAL) {
 			$return .= $this->group('', null, $this->inputClass);
@@ -300,7 +363,9 @@ abstract class BootstrapBase {
 			$return .= '</div>' . "\n";
 		}
 
-		$return .= '</div>' . "\n";
+		if (!isset($containerAttributes['display'])) {
+			$return .= '</div>' . "\n";
+		}
 
 		return $return;
 	}
@@ -320,9 +385,12 @@ abstract class BootstrapBase {
 	protected function field($type, $name, $label = null, $value = null, $checked = null, array $options = array())
 	{
 		$return = '';
+		$options = array_merge(array('id' => $name), $options);
+		$containerAttributes = $this->getContainerAttributes($options);
+		$labelAttributes = $this->getLabelAttributes($options);
 
-		if ($this->formType != self::FORM_INLINE) {
-			$return .= $this->group($name, null);
+		if ($this->formType != self::FORM_INLINE && !isset($containerAttributes['display'])) {
+			$return .= $this->group($name, null, 'form-group', $containerAttributes);
 		}
 
 		if ($this->formType == self::FORM_HORIZONTAL) {
@@ -330,15 +398,14 @@ abstract class BootstrapBase {
 		}
 
 		$return .= '<div class="' . $type . '">' . "\n";
-		$return .= $this->label($name, $label);
-		$return .= $this->form->$type($name, $value, $checked, $options) . "\n";
+		$return .= $this->label($name, $label, $labelAttributes, $this->form->$type($name, $value, $checked, $options));
 		$return .= '</div>' . "\n";
 
 		if ($this->formType == self::FORM_HORIZONTAL) {
 			$return .= '</div>' . "\n";
 		}
 
-		if ($this->formType != self::FORM_INLINE) {
+		if ($this->formType != self::FORM_INLINE && !isset($containerAttributes['display'])) {
 			$return .= '</div>';
 		}
 
@@ -356,6 +423,9 @@ abstract class BootstrapBase {
 	 */
 	protected function action($type, $value, array $attributes = array())
 	{
+		$return = '';
+		$containerAttributes = $this->getContainerAttributes($attributes);
+
 		switch ($type) {
 			case 'submit':
 				$attributes = array_merge(array('class' => 'btn btn-primary pull-right'), $attributes);
@@ -366,7 +436,9 @@ abstract class BootstrapBase {
 				$attributes = array_merge(array('class' => 'btn btn-default'), $attributes);
 		}
 
-		$return = $this->group('', null);
+		if (!isset($containerAttributes['display'])) {
+			$return .= $this->group('', null, 'form-group', $containerAttributes);
+		}
 
 		if ($this->formType == self::FORM_HORIZONTAL) {
 			$return .= $this->group('', null, $this->inputClass);
@@ -378,7 +450,9 @@ abstract class BootstrapBase {
 			$return .= '</div>' . "\n";
 		}
 
-		$return .= '</div>' . "\n";
+		if (!isset($containerAttributes['display'])) {
+			$return .= '</div>' . "\n";
+		}
 
 		return $return;
 	}
@@ -402,16 +476,18 @@ abstract class BootstrapBase {
 		switch ($type) {
 			case 'linkRoute':
 			case 'linkAction':
-			return $this->html->$type($location, $title, $parameters, $attributes);
+				$return = $this->html->$type($location, $title, $parameters, $attributes);
 				break;
 			case 'mailto':
-				return $this->html->$type($location, $title, $attributes);
+				$return = $this->html->$type($location, $title, $attributes);
 				break;
 			case 'link':
 			case 'secureLink':
 			default:
-				return $this->html->$type($location, $title, $attributes, $secure);
+				$return = $this->html->$type($location, $title, $attributes, $secure);
 		}
+
+		return $return;
 	}
 
 	/**
@@ -427,26 +503,54 @@ abstract class BootstrapBase {
 	 */
 	protected function alert($type = 'message', $content = null, $emphasis = null, $dismissible = false, array $attributes = array())
 	{
-		$class = '';
-
-		if($emphasis && is_string($emphasis)){
-			$content = '<strong>' . $emphasis . '</strong> ' . $content; 
-		}
-		
-		if ($dismissible) {
-			$class = 'alert-dismissable';
-		}
-
-		$attributes = array_merge(array('class' => 'alert ' . $class . ' alert-' . ($type != 'message' ? $type : 'default')), $attributes);
+		$attributes = array_merge(array('class' => 'alert' . ($dismissible ? ' alert-dismissable' : '') . ' alert-' . ($type != 'message' ? $type : 'default')), $attributes);
 		$return = '<div ' . $this->html->attributes($attributes) . '>';
 
-		if ($dismissible) {
+		if ($dismissible !== false) {
 			$return .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 		}
 
-		$return .= $content . '</div>';
+		$return .= ($emphasis !== null && is_string($emphasis) ? '<strong>' . $emphasis . '</strong> ' : '') . $content . '</div>';
 
 		return $return;
+	}
+
+	/**
+	 * Get container attributes.
+	 *
+	 * @param array &$attributes
+	 *
+	 * @return array
+	 */
+	protected function getContainerAttributes(array &$attributes = array())
+	{
+		$containerAttributes = array();
+
+		if (isset($attributes['container'])) {
+			$containerAttributes = $attributes['container'];
+			unset($attributes['container']);
+		}
+
+		return $containerAttributes;
+	}
+
+	/**
+	 * Get label attributes.
+	 *
+	 * @param array &$attributes
+	 *
+	 * @return array
+	 */
+	protected function getLabelAttributes(array &$attributes = array())
+	{
+		$labelAttributes = array();
+
+		if (isset($attributes['label'])) {
+			$labelAttributes = $attributes['label'];
+			unset($attributes['label']);
+		}
+
+		return $labelAttributes;
 	}
 
 }

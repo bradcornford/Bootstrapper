@@ -20,14 +20,16 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
+				$return = $this->add('style', self::CSS_BOOTSTRAP_CDN, $attributes) .
 					$this->add('style', self::CSS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
+				$return = $this->add('style', asset(self::CSS_BOOTSTRAP_LOCAL), $attributes) .
 					$this->add('style', asset(self::CSS_DATETIME_LOCAL), $attributes);
 		}
+
+		return $return;
 	}
 
 	/**
@@ -43,18 +45,20 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 		switch($type)
 		{
 			case 'cdn':
-				return $this->add('script', self::JS_JQUERY_CDN, $attributes) .
+				$return = $this->add('script', self::JS_JQUERY_CDN, $attributes) .
 					$this->add('script', self::JS_BOOTSTRAP_CDN, $attributes) .
-				$this->add('script', self::JS_MOMENT_CDN, $attributes) .
-				$this->add('script', self::JS_DATETIME_CDN, $attributes);
+					$this->add('script', self::JS_MOMENT_CDN, $attributes) .
+					$this->add('script', self::JS_DATETIME_CDN, $attributes);
 				break;
 			case 'local':
 			default:
-				return $this->add('script', asset(self::JS_BOOTSTRAP_JQUERY_LOCAL), $attributes) .
+				$return = $this->add('script', asset(self::JS_JQUERY_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_BOOTSTRAP_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_MOMENT_LOCAL), $attributes) .
 					$this->add('script', asset(self::JS_DATETIME_LOCAL), $attributes);
 		}
+
+		return $return;
 	}
 
 	/**
@@ -102,6 +106,86 @@ class Bootstrap extends BootstrapBase implements IncludableInterface, FormableIn
 	public function email($name, $label = null, $value = null, $errors = null, array $options = array())
 	{
 		return $this->input('email', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form telephone field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function telephone($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('telephone', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form number field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function number($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('number', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form url field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function url($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('url', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form range field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function range($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('range', $name, $label, $value, $errors, $options);
+	}
+
+	/**
+	 * Create a form search field.
+	 *
+	 * @param string                         $name
+	 * @param string                         $label
+	 * @param string                         $value
+	 * @param \Illuminate\Support\MessageBag $errors
+	 * @param array                          $options
+	 *
+	 * @return string
+	 */
+	public function search($name, $label = null, $value = null, $errors = null, array $options = array())
+	{
+		return $this->input('search', $name, $label, $value, $errors, $options);
 	}
 
 	/**
