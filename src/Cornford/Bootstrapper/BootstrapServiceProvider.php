@@ -29,7 +29,7 @@ class BootstrapServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['bootstrap'] = $this->app->share(function($app)
+		$this->app->singleton('bootstrap', function($app)
 		{
 			return new Bootstrap(
 				$this->app->make('Illuminate\Html\FormBuilder', ['csrfToken' => $app['session.store']->getToken()]),
