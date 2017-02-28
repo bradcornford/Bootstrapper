@@ -59,13 +59,13 @@ Next, update Composer from the Terminal:
 
 Once this operation completes, the next step is to add the required service providers. Open `app/config/app.php`, and add the new items to the providers array.
 
-	'Illuminate\Html\HtmlServiceProvider',
+	'Collective\Html\HtmlServiceProvider',
 	'Cornford\Bootstrapper\BootstrapServiceProvider',
 
 The final step is to introduce the required facades. Open `app/config/app.php`, and add the new items to the aliases array.
 
-	'Form'            => 'Illuminate\Html\FormFacade',
-	'HTML'            => 'Illuminate\Html\HtmlFacade',
+	'Form'            => 'Collective\Html\FormFacade',
+	'HTML'            => 'Collective\Html\HtmlFacade',
 	'Bootstrap'       => 'Cornford\Bootstrapper\Facades\Bootstrap',
 
 If you want to introduce the packages JavaScripts and Stylesheets, run the following command to pull them into your project.
