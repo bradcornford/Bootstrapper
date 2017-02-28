@@ -32,7 +32,7 @@ class BootstrapServiceProvider extends ServiceProvider {
 		$this->app->singleton('bootstrap', function($app)
 		{
 			return new Bootstrap(
-				$this->app->make('Collective\Html\FormBuilder', ['csrfToken' => $app['session.store']->getToken()]),
+				$this->app->make('Collective\Html\FormBuilder', ['csrfToken' => $app['session.store']->token()]),
 				$this->app->make('Collective\Html\HtmlBuilder'),
 				$this->app->make('Illuminate\Http\Request')
 			);
