@@ -8,7 +8,7 @@ class BootstrapSpec extends ObjectBehavior
 {
 	function let()
 	{
-		$form = Mockery::mock('Illuminate\Html\FormBuilder');
+		$form = Mockery::mock('Collective\Html\FormBuilder');
 		$form->shouldReceive('label')->andReturn('');
 		$form->shouldReceive('input')->andReturn('<input type="text" name="name" value="value">');
 		$form->shouldReceive('text')->andReturn('<input type="text" name="name" value="value">');
@@ -23,7 +23,7 @@ class BootstrapSpec extends ObjectBehavior
 		$form->shouldReceive('button')->andReturn('<input type="button" name="button" value="value">');
 		$form->shouldReceive('reset')->andReturn('<input type="reset" name="reset" value="value">');
 
-		$html = Mockery::mock('Illuminate\Html\HtmlBuilder');
+		$html = Mockery::mock('Collective\Html\HtmlBuilder');
 		$html->shouldReceive('attributes')->andReturn('');
 		$html->shouldReceive('style')->andReturn(Bootstrap::CSS_BOOTSTRAP_CDN)->once();
 		$html->shouldReceive('script')->andReturn(Bootstrap::JS_BOOTSTRAP_CDN)->once();

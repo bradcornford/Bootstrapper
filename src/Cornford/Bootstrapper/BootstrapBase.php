@@ -2,8 +2,8 @@
 
 namespace Cornford\Bootstrapper;
 
-use Illuminate\Html\FormBuilder;
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\FormBuilder;
+use Collective\Html\HtmlBuilder;
 use Illuminate\Http\Request;
 
 abstract class BootstrapBase {
@@ -33,14 +33,14 @@ abstract class BootstrapBase {
 	/**
 	 * Form
 	 *
-	 * @var \Illuminate\Html\FormBuilder
+	 * @var \Collective\Html\FormBuilder
 	 */
 	protected $form;
 
 	/**
 	 * HTML
 	 *
-	 * @var \Illuminate\Html\HtmlBuilder
+	 * @var \Collective\Html\HtmlBuilder
 	 */
 	protected $html;
 
