@@ -12,22 +12,22 @@ abstract class BootstrapBase {
 	const FORM_HORIZONTAL = 'horizontal';
 	const FORM_INLINE = 'inline';
 
-	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css';
+	const CSS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css';
 	const CSS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap.min.css';
 
-	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js';
+	const JS_BOOTSTRAP_CDN = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js';
 	const JS_BOOTSTRAP_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap.min.js';
 
-	const JS_JQUERY_CDN = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';
+	const JS_JQUERY_CDN = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js';
 	const JS_JQUERY_LOCAL = 'packages/cornford/bootstrapper/assets/js/jquery.min.js';
 
-	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js';
+	const JS_MOMENT_CDN = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js';
 	const JS_MOMENT_LOCAL = 'packages/cornford/bootstrapper/assets/js/moment.min.js';
 
-	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css';
+	const CSS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.4/css/bootstrap-datetimepicker.min.css';
 	const CSS_DATETIME_LOCAL = 'packages/cornford/bootstrapper/assets/css/bootstrap-datetimepicker.min.css';
 
-	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js';
+	const JS_DATETIME_CDN = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.4/js/bootstrap-datetimepicker.min.js';
 	const JS_DATETIME_LOCAL = 'packages/cornford/bootstrapper/assets/js/bootstrap-datetimepicker.min.js';
 
 	/**
