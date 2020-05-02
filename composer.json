@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/html": "5.*",
+        "laravelcollective/html": "5.*",
         "illuminate/support": "5.*",
         "illuminate/http": "5.*"
     },
